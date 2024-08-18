@@ -1,0 +1,23 @@
+#usda 1.0
+(
+    customLayerData = {
+        string creator = "Reality Composer Pro Version 1.0 (409.100.15)"
+    }
+    defaultPrim = "Root"
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+def Xform "Root"
+{
+    reorder nameChildren = ["AirJordan", "AirSportShoe", "ArntShoes", "BlueVansShoe", "CanguroShoes", "CanvasShoe", "FemaleShoes", "JapaneseShoesGeta", "MaleShoes", "MoonShoes", "NBSportShoes", "OldManShoes", "ProvocativePinkShoes", "RedHighHeelShoes", "SkateShoes", "WinterShoe", "WoodShoes", "fashionSportShoe", "leatherShoes", "militaryShoes", "oldFashionSportShoes"]
+    def "CanvasShoe" (
+        active = true
+        prepend references = @Models/CanvasShoe.usdz@
+    )
+    {
+        float3 xformOp:scale = (1, 1, 1)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+}
+

@@ -1,0 +1,52 @@
+#usda 1.0
+(
+    customLayerData = {
+        string creator = "Reality Composer Pro Version 1.0 (409.100.15)"
+    }
+    defaultPrim = "Root"
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+def Xform "Root"
+{
+    def "AirJordan" (
+        active = true
+        references = @Models/AirJordan.usdz@
+    )
+    {
+        reorder nameChildren = ["_materials", "scene", "env_light", "shoelace_shoelace_0_2"]
+        quatf xformOp:orient = (0.99999994, 0, 0, 0)
+        float3 xformOp:scale = (1, 1, 1)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        over "scene"
+        {
+            over "Meshes"
+            {
+                over "Sketchfab_model"
+                {
+                    over "d8deb8ca54d7411c8d14a56540e715c4_fbx"
+                    {
+                        over "RootNode"
+                        {
+                            over "shoe"
+                            {
+                                over "shoelace_shoelace_0"
+                                {
+                                    reorder nameChildren = ["shoelace_shoelace_0_001", "shoelace_shoelace_0_2"]
+                                }
+
+                                over "shoe_shoe_0"
+                                {
+                                    reorder nameChildren = ["shoe_shoe_0_001", "shoe_shoe_0_2"]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
