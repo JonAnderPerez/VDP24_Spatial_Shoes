@@ -1,7 +1,8 @@
 {
   "advancedEditorSelectedIdentifier" : "ProjectBrowser",
   "openSceneRelativePaths" : [
-    "AirJordan.usda"
+    "AirJordan.usda",
+    "JapaneseShoesGeta.usda"
   ],
   "recentIdentifiers" : {
     "0D44725A-9684-4064-A902-A4C2B19CB2C2" : [
@@ -2480,5 +2481,5 @@
       }
     ]
   },
-  "selectedSceneRelativePath" : "AirJordan.usda"
+  "selectedSceneRelativePath" : "JapaneseShoesGeta.usda"
 }

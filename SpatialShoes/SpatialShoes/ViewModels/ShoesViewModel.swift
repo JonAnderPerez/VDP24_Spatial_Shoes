@@ -28,7 +28,7 @@ final class ShoesViewModel {
         self.interactor = interactor
         do {
             self.shoes = try interactor.getShoes()
-            self.selectedShoe = shoes.first(where: { $0.id == 11345 }) //10345 })
+            self.selectedShoe = shoes.randomElement()
         } catch {
             self.shoes = []
             errorMsg = "Error en la carga del JSON de zapatillas: \(error)"
@@ -38,6 +38,19 @@ final class ShoesViewModel {
     
     func selectRandom() {
         selectedShoe = shoes.randomElement()
+    }
+    
+    func getColor(_ shoeColor: ShoeColor) -> Color {
+        switch shoeColor {
+        case .black:
+            return .black
+        case .brown:
+            return .brown
+        case .red:
+            return .red
+        case .white:
+            return .white
+        }
     }
     
     @MainActor func modifySmallShoeScaleAndPosition(_ shoeEntity: Entity) {

@@ -6,6 +6,12 @@
 //
 
 import Foundation
+enum ShoeColor: String, Codable, CaseIterable {
+    case black = "Negro"
+    case brown = "Marrón"
+    case red = "Rojo"
+    case white = "Blanco"
+}
 
 struct Shoe: Codable, Identifiable, Hashable {
     let id: Int
@@ -20,7 +26,7 @@ struct Shoe: Codable, Identifiable, Hashable {
     let origin: String
     let gender: String
     let weight: Double
-    let colors: [String]
+    let colors: [ShoeColor]
     let warranty: Int
     let certifications: [String]
 }

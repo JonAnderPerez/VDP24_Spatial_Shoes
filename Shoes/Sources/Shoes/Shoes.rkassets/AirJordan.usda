@@ -17,7 +17,7 @@ def Xform "Root"
     {
         reorder nameChildren = ["_materials", "scene", "env_light", "shoelace_shoelace_0_2"]
         quatf xformOp:orient = (0.99999994, 0, 0, 0)
-        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:scale = (0.9, 0.9, 0.9)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
         over "scene"

@@ -70,9 +70,9 @@ extension Shoe {
         gender: "Unisex",
         weight: 1.2,
         colors: [
-            "Rojo",
-            "Blanco",
-            "Negro"
+            .red,
+            .white,
+            .black
         ],
         warranty: 2,
         certifications: [
