@@ -25,6 +25,8 @@ final class ShoesViewModel {
     @ObservationIgnored private var rotationTimers: [Cancellable] = []
     
     init(interactor: DataInteractor = Interactor()) {
+        GestureComponent.registerComponent()
+        
         self.interactor = interactor
         do {
             self.shoes = try interactor.getShoes()
@@ -59,11 +61,9 @@ final class ShoesViewModel {
         
         // Rotación en el eje X
         let rotationX = simd_quatf(angle: -45 * .pi / 180, axis: [1, 0, 0])
-        // Rotación en el eje Y
-        //let rotationY = simd_quatf(angle: -35 * .pi / 180, axis: [0, 1, 0])
 
         // Combinación de las rotaciones
-        shoeEntity.transform.rotation = rotationX //* rotationY
+        shoeEntity.transform.rotation = rotationX
     }
     
     @MainActor func modifyBigShoeScaleAndPosition(_ shoeEntity: Entity) {
@@ -72,11 +72,22 @@ final class ShoesViewModel {
         
         // Rotación en el eje X
         let rotationX = simd_quatf(angle: -45 * .pi / 180, axis: [1, 0, 0])
-        // Rotación en el eje Y
-        //let rotationY = simd_quatf(angle: -45 * .pi / 180, axis: [0, 1, 0])
 
         // Combinación de las rotaciones
-        shoeEntity.transform.rotation = rotationX //* rotationY
+        shoeEntity.transform.rotation = rotationX
+    }
+    
+    @MainActor func modifyVolumetricShoeScaleAndPosition(_ shoeEntity: Entity) {
+        shoeEntity.scale *= 0.008
+        shoeEntity.position = [0, -0.2, 0.15]
+        
+        // Info: Con las colisiones generadas por shoeEntity.generateCollisionShapes(recursive: true) no interactua con InputTargetComponent, ni con las colisiones generadas desde RCP
+        shoeEntity.components.set(CollisionComponent(shapes: [.generateBox(width: 30, height: 60, depth: 30)
+                                                                    .offsetBy(translation: [0, 0, 15])]))
+        shoeEntity.components.set(InputTargetComponent())
+        
+        let gestureComponent = GestureComponent()
+        shoeEntity.components.set(gestureComponent)
     }
 
     func rotateShoe(_ shoeEntity: Entity, rotate: Bool = true) {

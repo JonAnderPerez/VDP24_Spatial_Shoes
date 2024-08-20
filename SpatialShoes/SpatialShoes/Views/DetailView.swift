@@ -11,32 +11,35 @@ import Shoes
 
 struct DetailView: View {
     @Environment(ShoesViewModel.self) private var vm
+    @Environment(\.openWindow) private var openWindow
+    
+    @State var selectedShoe: Shoe
     
     @State private var rotate = false
     @State private var parentEntity: Entity?
     
     var body: some View {
         HStack {
-            if let selectedShoe = vm.selectedShoe {
+            VStack(alignment: .leading, spacing: 16) {
+                HStack {
+                    Text(selectedShoe.name)
+                        .font(.extraLargeTitle)
+                    
+                    Button("Favorito", systemImage: "star") {
+                        
+                    }
+                    .labelStyle(.iconOnly)
+                }
+                
+                Text("\(selectedShoe.price.formatted(.number))€")
+                    .font(.largeTitle)
+                    .foregroundStyle(.black)
+                    .padding(.vertical, 8)
+                    .padding(.horizontal, 16)
+                    .background(RoundedRectangle(cornerRadius: 24).foregroundStyle(Color(.yellow)))
+                
                 ScrollView {
                     VStack(alignment: .leading, spacing: 16) {
-                        HStack {
-                            Text(selectedShoe.name)
-                                .font(.extraLargeTitle)
-                            
-                            Button("Favorito", systemImage: "star") {
-                                
-                            }
-                            .labelStyle(.iconOnly)
-                        }
-                        
-                        Text("\(selectedShoe.price.formatted(.number))€")
-                            .font(.largeTitle)
-                            .foregroundStyle(.black)
-                            .padding(.vertical, 8)
-                            .padding(.horizontal, 16)
-                            .background(RoundedRectangle(cornerRadius: 24).foregroundStyle(Color(.yellow)))
-                        
                         Text(selectedShoe.description)
                             .font(.title2)
                             .foregroundStyle(.secondary)
@@ -54,46 +57,46 @@ struct DetailView: View {
                     }
                 }
                 .scrollIndicators(.never)
-                
-                Spacer()
-                
-                RealityView { content in
-                    do {
-                        let shoeEntity = try await Entity(named: selectedShoe.model3DName, in: shoesBundle)
-                        
-                        parentEntity = Entity()
-                        parentEntity!.addChild(shoeEntity)
-                        
-                        //Anadimos la zapatilla a la escena
-                        content.add(parentEntity!)
-                        
-                        //Modificamos la zapatilla
-                        vm.modifyBigShoeScaleAndPosition(shoeEntity)
-                    } catch {
-                        print("Error al cargar las zapatillas: \(error)")
-                    }
-                } update: { _ in
-                    if let selectedShoe = vm.selectedShoe, let childEntity = parentEntity?.children.first {
-                        parentEntity?.removeChild(childEntity)
-                        
-                        Task {
-                            do {
-                                let shoeEntity = try await Entity(named: selectedShoe.model3DName, in: shoesBundle)
-                                
-                                parentEntity!.addChild(shoeEntity)
-                                
-                                //Modificamos la zapatilla
-                                vm.modifyBigShoeScaleAndPosition(shoeEntity)
-                            } catch {
-                                print("Error al cargar las zapatillas: \(error)")
-                            }
+            }
+
+            Spacer()
+            
+            RealityView { content in
+                do {
+                    let shoeEntity = try await Entity(named: selectedShoe.model3DName, in: shoesBundle)
+                    
+                    parentEntity = Entity()
+                    parentEntity!.addChild(shoeEntity)
+                    
+                    //Anadimos la zapatilla a la escena
+                    content.add(parentEntity!)
+                    
+                    //Modificamos la zapatilla
+                    vm.modifyBigShoeScaleAndPosition(shoeEntity)
+                } catch {
+                    print("Error al cargar las zapatillas: \(error)")
+                }
+            } update: { _ in
+                if let selectedShoe = vm.selectedShoe, let childEntity = parentEntity?.children.first {
+                    parentEntity?.removeChild(childEntity)
+                    
+                    Task {
+                        do {
+                            let shoeEntity = try await Entity(named: selectedShoe.model3DName, in: shoesBundle)
+                            
+                            parentEntity!.addChild(shoeEntity)
+                            
+                            //Modificamos la zapatilla
+                            vm.modifyBigShoeScaleAndPosition(shoeEntity)
+                        } catch {
+                            print("Error al cargar las zapatillas: \(error)")
                         }
                     }
                 }
-                .padding()
-                .frame(width: 400, height: 400)
-                .frame(depth: 400, alignment: .back)
             }
+            .padding()
+            .frame(width: 400, height: 400)
+            .frame(depth: 400, alignment: .back)
         }
         .padding(32)
         .navigationTitle("Spatial Shoes")
@@ -103,9 +106,9 @@ struct DetailView: View {
             }
             ToolbarItem(placement: .bottomOrnament) {
                 Button {
-                    
+                    openWindow(id:"ShoeDetail3D", value: selectedShoe)
                 } label: {
-                    Label("Carrousel immersivo", systemImage: "square.stack.3d.down.forward.fill")
+                    Label("Ver en detalle", systemImage: "view.3d")
                 }
             }
         }

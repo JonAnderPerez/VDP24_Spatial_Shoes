@@ -59,8 +59,8 @@ struct HomeView: View {
                             .background(RoundedRectangle(cornerRadius: 100, style: .circular).foregroundStyle(vm.getColor(selectedShoe.colors.first ?? .white)))
                             .padding(.top)
                             
-                            Button("Info", systemImage: "plus") {
-                                vm.selectRandom()
+                            NavigationLink(value: selectedShoe) {
+                                Label("Info", systemImage: "plus")
                             }
                         }
                         
@@ -123,6 +123,9 @@ struct HomeView: View {
                 //Anadimos la rotacion
                 vm.rotateShoe(parentEntity!, rotate: rotate)
             }
+            .navigationDestination(for: Shoe.self) { shoe in
+                 DetailView(selectedShoe: shoe)
+             }
         }
     }
 }

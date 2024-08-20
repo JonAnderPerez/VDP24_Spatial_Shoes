@@ -22,6 +22,9 @@
 		8BA798752C6FA169008437D4 /* FavView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA798742C6FA169008437D4 /* FavView.swift */; };
 		8BA798772C6FA172008437D4 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA798762C6FA172008437D4 /* DetailView.swift */; };
 		8BA7987A2C6FA80E008437D4 /* Shoes in Frameworks */ = {isa = PBXBuildFile; productRef = 8BA798792C6FA80E008437D4 /* Shoes */; };
+		8BDCE4332C74AF05001F45F2 /* Detail3DView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDCE4322C74AF05001F45F2 /* Detail3DView.swift */; };
+		8BDCE4372C74BAD1001F45F2 /* GestureComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDCE4362C74BAD0001F45F2 /* GestureComponent.swift */; };
+		8BDCE43A2C74BBD4001F45F2 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDCE4392C74BBD4001F45F2 /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +45,9 @@
 		8BA798722C6FA156008437D4 /* GalleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryView.swift; sourceTree = "<group>"; };
 		8BA798742C6FA169008437D4 /* FavView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavView.swift; sourceTree = "<group>"; };
 		8BA798762C6FA172008437D4 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		8BDCE4322C74AF05001F45F2 /* Detail3DView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Detail3DView.swift; sourceTree = "<group>"; };
+		8BDCE4362C74BAD0001F45F2 /* GestureComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureComponent.swift; sourceTree = "<group>"; };
+		8BDCE4392C74BBD4001F45F2 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +86,7 @@
 				8BA798542C6F970B008437D4 /* Preview Content */,
 				8BA7985D2C6F996C008437D4 /* System */,
 				8BA798602C6F9A19008437D4 /* Resources */,
+				8BDCE4342C74BABA001F45F2 /* Utils */,
 				8BA798632C6F9A54008437D4 /* Interactors */,
 				8BA798682C6F9B16008437D4 /* Models */,
 				8BA7986D2C6F9E29008437D4 /* ViewModels */,
@@ -123,6 +130,7 @@
 				8BA798722C6FA156008437D4 /* GalleryView.swift */,
 				8BA798742C6FA169008437D4 /* FavView.swift */,
 				8BA798762C6FA172008437D4 /* DetailView.swift */,
+				8BDCE4322C74AF05001F45F2 /* Detail3DView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -165,6 +173,31 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8BDCE4342C74BABA001F45F2 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				8BDCE4382C74BBC8001F45F2 /* Extension */,
+				8BDCE4352C74BAC0001F45F2 /* Gesture */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		8BDCE4352C74BAC0001F45F2 /* Gesture */ = {
+			isa = PBXGroup;
+			children = (
+				8BDCE4362C74BAD0001F45F2 /* GestureComponent.swift */,
+			);
+			path = Gesture;
+			sourceTree = "<group>";
+		};
+		8BDCE4382C74BBC8001F45F2 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				8BDCE4392C74BBD4001F45F2 /* Extensions.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -243,15 +276,18 @@
 			files = (
 				8BA798672C6F9A90008437D4 /* JSONInteractor.swift in Sources */,
 				8BA7986C2C6F9CB0008437D4 /* DataTest.swift in Sources */,
+				8BDCE4372C74BAD1001F45F2 /* GestureComponent.swift in Sources */,
 				8BA7986F2C6F9F9B008437D4 /* ShoesViewModel.swift in Sources */,
 				8BA798652C6F9A69008437D4 /* DataInteractor.swift in Sources */,
 				8BA798512C6F970A008437D4 /* ContentView.swift in Sources */,
 				8BA798772C6FA172008437D4 /* DetailView.swift in Sources */,
+				8BDCE4332C74AF05001F45F2 /* Detail3DView.swift in Sources */,
 				8BA798712C6FA146008437D4 /* HomeView.swift in Sources */,
 				8BA798752C6FA169008437D4 /* FavView.swift in Sources */,
 				8BA7986A2C6F9B55008437D4 /* Shoe.swift in Sources */,
 				8BA798732C6FA156008437D4 /* GalleryView.swift in Sources */,
 				8BA7984F2C6F970A008437D4 /* SpatialShoesApp.swift in Sources */,
+				8BDCE43A2C74BBD4001F45F2 /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

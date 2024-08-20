@@ -41,7 +41,14 @@ extension FavView {
 
 extension DetailView {
     static var preview: some View {
-        DetailView()
+        DetailView(selectedShoe: .test)
+            .environment(ShoesViewModel(interactor: DataTest()))
+    }
+}
+
+extension Detail3DView {
+    static var preview: some View {
+        Detail3DView(selectedShoe: .test)
             .environment(ShoesViewModel(interactor: DataTest()))
     }
 }
