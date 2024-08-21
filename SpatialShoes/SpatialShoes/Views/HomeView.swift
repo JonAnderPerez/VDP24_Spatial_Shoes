@@ -11,14 +11,16 @@ import Shoes
 
 struct HomeView: View {
     @Environment(ShoesViewModel.self) private var vm
+    @Environment(\.openWindow) private var open
+    @Environment(\.dismissWindow) private var dismiss
     
-    @State private var rotate = false
     @State private var parentEntity: Entity?
     
     var body: some View {
+        @Bindable var vmBindable = vm
         NavigationStack {
             VStack {
-                HStack {
+                HStack(alignment: .center) {
                     if let selectedShoe = vm.selectedShoe {
                         VStack(alignment: .leading, spacing: 16) {
                             HStack {
@@ -32,7 +34,6 @@ struct HomeView: View {
                             }
                             
                             Text(selectedShoe.description)
-                                .lineLimit(4)
                                 .font(.title2)
                                 .foregroundStyle(.secondary)
                             
@@ -43,19 +44,22 @@ struct HomeView: View {
                                 .padding(.horizontal, 16)
                                 .background(RoundedRectangle(cornerRadius: 24).foregroundStyle(Color(.yellow)))
                             
-                            HStack(alignment: .top) {
-                                Spacer().frame(width: 32)
-                                
-                                ForEach(selectedShoe.colors.dropFirst(), id: \.self) { shoeColor in
-                                    Circle()
-                                        .frame(width: 32, height: 32)
-                                        .offset(x: 0, y: -16)
-                                        .padding(.trailing, 8)
-                                        .foregroundStyle(vm.getColor(shoeColor))
-                                }
-
-                                Spacer().frame(width: 350, height: 96)
+                            VStack(alignment: .leading) {
+                                HStack(alignment: .top) {
+                                    Spacer().frame(width: 32)
+                                    
+                                    ForEach(selectedShoe.colors.dropFirst(), id: \.self) { shoeColor in
+                                        Circle()
+                                            .frame(width: 32, height: 32)
+                                            .padding(.trailing, 8)
+                                            .foregroundStyle(vm.getColor(shoeColor))
+                                    }
+                                    
+                                    Spacer()
+                                }.offset(x: 0, y: -16)
+                                Spacer()
                             }
+                            .frame(width: 350, height: 96)
                             .background(RoundedRectangle(cornerRadius: 100, style: .circular).foregroundStyle(vm.getColor(selectedShoe.colors.first ?? .white)))
                             .padding(.top)
                             
@@ -78,6 +82,11 @@ struct HomeView: View {
                                 
                                 //Modificamos la zapatilla
                                 vm.modifyBigShoeScaleAndPosition(shoeEntity)
+                                
+                                if vm.rotate {
+                                    //Anadimos la rotacion
+                                    vm.rotateShoe(parentEntity!, rotate: vm.rotate)
+                                }
                             } catch {
                                 print("Error al cargar las zapatillas: \(error)")
                             }
@@ -109,7 +118,7 @@ struct HomeView: View {
             .navigationTitle("Spatial Shoes")
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    Toggle("Rotación 3D", systemImage: "rotate.3d", isOn: $rotate)
+                    Toggle("Rotación 3D", systemImage: "rotate.3d", isOn: $vmBindable.rotate)
                 }
                 ToolbarItem(placement: .bottomOrnament) {
                     Button {
@@ -119,13 +128,19 @@ struct HomeView: View {
                     }
                 }
             }
-            .onChange(of: rotate) { _, _ in
+            .onChange(of: vm.rotate) { _, _ in
                 //Anadimos la rotacion
-                vm.rotateShoe(parentEntity!, rotate: rotate)
+                vm.rotateShoe(parentEntity!, rotate: vm.rotate)
             }
             .navigationDestination(for: Shoe.self) { shoe in
                  DetailView(selectedShoe: shoe)
-             }
+            }
+            .onAppear {
+                open(id: "HomeScrollView")
+            }
+            .onDisappear {
+                dismiss(id: "HomeScrollView")
+            }
         }
     }
 }

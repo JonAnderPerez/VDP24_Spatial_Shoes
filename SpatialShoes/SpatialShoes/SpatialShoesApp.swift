@@ -17,6 +17,15 @@ struct SpatialShoesApp: App {
                 .environment(shoesVM)
         }
         
+        WindowGroup(id: "HomeScrollView") {
+            HomeScrollView()
+                .environment(shoesVM)
+        }
+        .windowStyle(.plain)
+        .windowResizability(.contentSize)
+        //.defaultPosition(.bottom) //TODO: Para VisionOS 2.0
+        
+        
         WindowGroup(id: "ShoeDetail3D", for: Shoe.self) { $selectedShoe in
             Detail3DView(selectedShoe: selectedShoe)
                 .environment(shoesVM)
@@ -25,5 +34,6 @@ struct SpatialShoesApp: App {
         }
         .windowStyle(.volumetric)
         .defaultSize(width: 1, height: 1, depth: 1, in: .meters)
+        //.defaultPosition(.trailing) //TODO: Para VisionOS 2.0
     }
 }

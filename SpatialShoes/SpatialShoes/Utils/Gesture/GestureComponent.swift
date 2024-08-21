@@ -71,6 +71,9 @@ public struct GestureComponent: Component, Codable {
     // Un valor booleano que indica si un gesto puede rotar la entidad.
     public var canRotate: Bool = true
     
+    // Un valor boolean que indica si el modelo volvera a su transformada original al soltar el modelo
+    public var resetOnEnded: Bool = false //TODO: Animar la vuelta al modelo original
+    
     // MARK: - Lógica de Arrastre (Drag)
     
     // Maneja las acciones de `.onChanged` para los gestos de arrastre.
@@ -131,6 +134,13 @@ public struct GestureComponent: Component, Codable {
     mutating func onEnded(value: EntityTargetValue<DragGesture.Value>) {
         let state = EntityGestureState.shared
         state.isDragging = false
+        
+        if resetOnEnded {
+            // Asegurarse de que hay una entidad seleccionada.
+            guard let entity = state.targetedEntity else { fatalError("El gesto no contiene una entidad") }
+            
+            entity.setOrientation(state.initialOrientation!, relativeTo: nil)
+        }
     }
 
     // MARK: - Lógica de Escala
@@ -156,7 +166,15 @@ public struct GestureComponent: Component, Codable {
     
     // Maneja las acciones de `.onEnded` para los gestos de ampliación (escala).
     mutating func onEnded(value: EntityTargetValue<MagnifyGesture.Value>) {
-        EntityGestureState.shared.isScaling = false
+        let state = EntityGestureState.shared
+        state.isScaling = false
+        
+        if resetOnEnded {
+            // Asegurarse de que hay una entidad seleccionada.
+            guard let entity = state.targetedEntity else { fatalError("El gesto no contiene una entidad") }
+            
+            entity.scale = state.startScale
+        }
     }
     
     // MARK: - Lógica de Rotación
@@ -187,6 +205,14 @@ public struct GestureComponent: Component, Codable {
     
     // Maneja las acciones de `.onEnded` para los gestos de rotación.
     mutating func onEnded(value: EntityTargetValue<RotateGesture3D.Value>) {
-        EntityGestureState.shared.isRotating = false
+        let state = EntityGestureState.shared
+        state.isRotating = false
+        
+        if resetOnEnded {
+            // Asegurarse de que hay una entidad seleccionada.
+            guard let entity = state.targetedEntity else { fatalError("El gesto no contiene una entidad") }
+            
+            entity.setOrientation(.init(state.startOrientation), relativeTo: nil)
+        }
     }
 }

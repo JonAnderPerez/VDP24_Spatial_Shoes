@@ -27,45 +27,12 @@ struct GalleryView: View {
             ScrollView {
                 LazyVGrid(columns: gridItem) {
                     ForEach(vm.shoes) { shoe in
-                        VStack {
-                            RealityView { content in
-                                do {
-                                    let shoeEntity = try await Entity(named: shoe.model3DName, in: shoesBundle)
-                                    
-                                    let parentEntity = Entity()
-                                    parentEntity.addChild(shoeEntity)
-                                    
-                                    //Anadimos la zapatilla a la escena
-                                    content.add(parentEntity)
-                                    
-                                    //Modificamos la zapatilla
-                                    vm.modifySmallShoeScaleAndPosition(shoeEntity)
-                                } catch {
-                                    print("Error al cargar las zapatillas: \(error)")
-                                }
-                            } update: { _ in
-                                
-                            }
-                            .padding()
-                            .frame(width: 250, height: 250)
-                            .frame(depth: 250, alignment: .back)
-                            
-                            HStack(alignment: .center) {
-                                Text(shoe.name)
-                                    .font(.title)
-                                    .multilineTextAlignment(.leading)
-                                    .lineLimit(2, reservesSpace: true)
-                                    .padding()
-                                
-                                Button("Favorito", systemImage: "star") {
-                                    
-                                }
-                                .labelStyle(.iconOnly)
-                                .padding()
-                            }
+                        NavigationLink(value: shoe) {
+                            ShoeCard(shoe: shoe)
+                                .glassBackgroundEffect()
                         }
-                        .frame(width: 300)
-                        .glassBackgroundEffect()
+                        .buttonStyle(.plain)
+                        .buttonBorderShape(.roundedRectangle(radius: 42))
                     }
                 }
             }
@@ -89,6 +56,9 @@ struct GalleryView: View {
                         
                     }
                 }
+            }
+            .navigationDestination(for: Shoe.self) { shoe in
+                 DetailView(selectedShoe: shoe)
             }
         }
     }

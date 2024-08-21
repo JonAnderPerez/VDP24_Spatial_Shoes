@@ -15,10 +15,10 @@ struct DetailView: View {
     
     @State var selectedShoe: Shoe
     
-    @State private var rotate = false
     @State private var parentEntity: Entity?
     
     var body: some View {
+        @Bindable var vmBindable = vm
         HStack {
             VStack(alignment: .leading, spacing: 16) {
                 HStack {
@@ -73,6 +73,11 @@ struct DetailView: View {
                     
                     //Modificamos la zapatilla
                     vm.modifyBigShoeScaleAndPosition(shoeEntity)
+                    
+                    if vm.rotate {
+                        //Anadimos la rotacion
+                        vm.rotateShoe(parentEntity!, rotate: vm.rotate)
+                    }
                 } catch {
                     print("Error al cargar las zapatillas: \(error)")
                 }
@@ -102,7 +107,7 @@ struct DetailView: View {
         .navigationTitle("Spatial Shoes")
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
-                Toggle("Rotación 3D", systemImage: "rotate.3d", isOn: $rotate)
+                Toggle("Rotación 3D", systemImage: "rotate.3d", isOn: $vmBindable.rotate)
             }
             ToolbarItem(placement: .bottomOrnament) {
                 Button {
@@ -112,9 +117,9 @@ struct DetailView: View {
                 }
             }
         }
-        .onChange(of: rotate) { _, _ in
+        .onChange(of: vm.rotate) { _, _ in
             //Anadimos la rotacion
-            vm.rotateShoe(parentEntity!, rotate: rotate)
+            vm.rotateShoe(parentEntity!, rotate: vm.rotate)
         }
     }
     

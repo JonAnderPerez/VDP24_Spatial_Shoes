@@ -19,46 +19,11 @@ struct FavView: View {
             ScrollView {
                 LazyVGrid(columns: gridItem) {
                     ForEach(vm.shoes) { shoe in
-                        VStack {
-                            RealityView { content in
-                                do {
-                                    let shoeEntity = try await Entity(named: shoe.model3DName, in: shoesBundle)
-                                    
-                                    let parentEntity = Entity()
-                                    parentEntity.addChild(shoeEntity)
-                                    
-                                    //Anadimos la zapatilla a la escena
-                                    content.add(parentEntity)
-                                    
-                                    //Modificamos la zapatilla
-                                    vm.modifySmallShoeScaleAndPosition(shoeEntity)
-                                    
-                                    //Anadimos la rotacion
-                                    vm.rotateShoe(parentEntity)
-                                } catch {
-                                    print("Error al cargar las zapatillas: \(error)")
-                                }
-                            } update: { _ in
-                                
-                            }
-                            .padding()
-                            .frame(width: 250, height: 250)
-                            .frame(depth: 250, alignment: .back)
-                            
-                            HStack {
-                                Text(shoe.name)
-                                    .font(.title)
-                                    .padding()
-                                
-                                Button("Favorito", systemImage: "star") {
-                                    
-                                }
-                                .labelStyle(.iconOnly)
-                                .padding()
-                            }
+                        NavigationLink(value: shoe) {
+                            ShoeCard(shoe: shoe, rotate: true)
                         }
-                        .frame(width: 300, height: 400)
-                        //.background(in: .rect(cornerRadius: 24))
+                        .buttonStyle(.plain)
+                        .buttonBorderShape(.roundedRectangle(radius: 42))
                     }
                 }
             }
@@ -66,6 +31,9 @@ struct FavView: View {
             .safeAreaPadding(.horizontal)
             .scrollIndicators(.never)
             .navigationTitle("Spatial Shoes")
+            .navigationDestination(for: Shoe.self) { shoe in
+                 DetailView(selectedShoe: shoe)
+            }
         }
     }
 }

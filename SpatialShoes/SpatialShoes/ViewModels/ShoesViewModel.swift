@@ -16,10 +16,9 @@ final class ShoesViewModel {
     var shoes: [Shoe]
     var selectedShoe: Shoe?
     
-    var showingPlanets = false
-    var showingImmersive = false
+    var rotate = false
     
-    @ObservationIgnored var errorMsg = ""
+    @ObservationIgnored var errorMsg = "" //TODO: Esto esta sin implementar
     var showAlert = false
     
     @ObservationIgnored private var rotationTimers: [Cancellable] = []
@@ -59,17 +58,17 @@ final class ShoesViewModel {
         shoeEntity.scale *= 0.0025
         shoeEntity.position = [0, -0.03, 0]
         
-        // Rotación en el eje X
-        let rotationX = simd_quatf(angle: -45 * .pi / 180, axis: [1, 0, 0])
-
-        // Combinación de las rotaciones
-        shoeEntity.transform.rotation = rotationX
+        modifyRotation(shoeEntity)
     }
     
     @MainActor func modifyBigShoeScaleAndPosition(_ shoeEntity: Entity) {
         shoeEntity.scale *= 0.005
         shoeEntity.position = [0, -0.03, 0]
         
+        modifyRotation(shoeEntity)
+    }
+    
+    @MainActor private func modifyRotation(_ shoeEntity: Entity) {
         // Rotación en el eje X
         let rotationX = simd_quatf(angle: -45 * .pi / 180, axis: [1, 0, 0])
 
@@ -124,7 +123,7 @@ final class ShoesViewModel {
                 shoeEntity.transform.rotation = initialRotation * incrementalRotation
             }
         
-        rotationTimers.append(timer) // Asumiendo que `rotationTimers` es un array para almacenar los timers
+        rotationTimers.append(timer)
     }
 
 }

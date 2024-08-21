@@ -25,6 +25,13 @@ extension HomeView {
     }
 }
 
+extension HomeScrollView {
+    static var preview: some View {
+        HomeScrollView()
+            .environment(ShoesViewModel(interactor: DataTest()))
+    }
+}
+
 extension GalleryView {
     static var preview: some View {
         GalleryView()
@@ -49,6 +56,13 @@ extension DetailView {
 extension Detail3DView {
     static var preview: some View {
         Detail3DView(selectedShoe: .test)
+            .environment(ShoesViewModel(interactor: DataTest()))
+    }
+}
+
+extension ShoeCard {
+    static var preview: some View {
+        ShoeCard(shoe: .test, rotate: false)
             .environment(ShoesViewModel(interactor: DataTest()))
     }
 }
