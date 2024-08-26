@@ -14,14 +14,7 @@ struct HomeScrollView: View {
         ScrollView(.horizontal) {
             LazyHStack {
                 ForEach(vm.shoes) { shoe in
-                    Button {
-                        vm.selectedShoe = shoe
-                    } label: {
-                        ShoeCard(shoe: shoe, rotate: false)
-                            .glassBackgroundEffect()
-                    }
-                    .buttonStyle(.plain)
-                    .buttonBorderShape(.roundedRectangle(radius: 42))
+                    ShoeCard(shoe: shoe, isNavigationCard: false)
                 }
             }
         }

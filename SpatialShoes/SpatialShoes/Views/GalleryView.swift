@@ -12,43 +12,25 @@ import Shoes
 struct GalleryView: View {
     @Environment(ShoesViewModel.self) private var vm
     
-    @State private var columnVisibility: NavigationSplitViewVisibility = .detailOnly
-    
     private let gridItem: [GridItem] = [GridItem(.adaptive(minimum: 300))]
     
     var body: some View {
-        NavigationSplitView(columnVisibility: $columnVisibility) {
-            // Sidebar content
-            List {
-                
-            }
-            .navigationTitle("Filtros")
-        } detail: {
+        NavigationStack {
             ScrollView {
                 LazyVGrid(columns: gridItem) {
                     ForEach(vm.shoes) { shoe in
-                        NavigationLink(value: shoe) {
-                            ShoeCard(shoe: shoe)
-                                .glassBackgroundEffect()
-                        }
-                        .buttonStyle(.plain)
-                        .buttonBorderShape(.roundedRectangle(radius: 42))
+                        ShoeCard(shoe: shoe, isNavigationCard: true)
                     }
                 }
             }
             .safeAreaPadding(.vertical, 32)
             .safeAreaPadding(.horizontal)
             .scrollIndicators(.never)
-            .navigationSplitViewStyle(.balanced)
             .navigationTitle("Spatial Shoes")
             .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
+                ToolbarItem(placement: .topBarTrailing) {
                     Button("Filtros", systemImage: "line.3.horizontal.decrease") {
-                        if columnVisibility == .all {
-                            columnVisibility = .detailOnly
-                        } else {
-                            columnVisibility = .all
-                        }
+
                     }
                 }
                 ToolbarItem(placement: .bottomOrnament) {

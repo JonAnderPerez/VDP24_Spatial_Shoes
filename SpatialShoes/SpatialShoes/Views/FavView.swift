@@ -19,11 +19,7 @@ struct FavView: View {
             ScrollView {
                 LazyVGrid(columns: gridItem) {
                     ForEach(vm.shoes) { shoe in
-                        NavigationLink(value: shoe) {
-                            ShoeCard(shoe: shoe, rotate: true)
-                        }
-                        .buttonStyle(.plain)
-                        .buttonBorderShape(.roundedRectangle(radius: 42))
+                        ShoeCard(shoe: shoe, isNavigationCard: true, rotate: true)
                     }
                 }
             }
