@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import SwiftData
+
 enum ShoeColor: String, Codable, CaseIterable {
     case black = "Negro"
     case brown = "Marrón"
@@ -29,4 +31,19 @@ struct Shoe: Codable, Identifiable, Hashable {
     let colors: [ShoeColor]
     let warranty: Int
     let certifications: [String]
+    
+    var isFav: Bool = false
+    
+    enum CodingKeys: String, CodingKey {
+        case id, name, brand, size, price, description, model3DName, type, materials, origin, gender, weight, colors, warranty, certifications
+    }
+}
+
+@Model
+class FavShoe {
+    @Attribute(.unique) let id: Int
+    
+    init(id: Int) {
+        self.id = id
+    }
 }

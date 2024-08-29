@@ -23,15 +23,8 @@ struct HomeView: View {
                 HStack(alignment: .center) {
                     if let selectedShoe = vm.selectedShoe {
                         VStack(alignment: .leading, spacing: 16) {
-                            HStack {
-                                Text(selectedShoe.name)
-                                    .font(.extraLargeTitle)
-                                
-                                Button("Favorito", systemImage: "star") {
-                                    
-                                }
-                                .labelStyle(.iconOnly)
-                            }
+                            Text(selectedShoe.name)
+                                .font(.extraLargeTitle)
                             
                             Text(selectedShoe.description)
                                 .font(.title2)
@@ -116,24 +109,17 @@ struct HomeView: View {
             }
             .padding(32)
             .navigationTitle("Spatial Shoes")
+            .navigationDestination(for: Shoe.self) { shoe in
+                 DetailView(selectedShoe: shoe)
+            }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Toggle("Rotación 3D", systemImage: "rotate.3d", isOn: $vmBindable.rotate)
-                }
-                ToolbarItem(placement: .bottomOrnament) {
-                    Button {
-                        
-                    } label: {
-                        Label("Carrousel immersivo", systemImage: "square.stack.3d.down.forward.fill")
-                    }
                 }
             }
             .onChange(of: vm.rotate) { _, _ in
                 //Anadimos la rotacion
                 vm.rotateShoe(parentEntity!, rotate: vm.rotate)
-            }
-            .navigationDestination(for: Shoe.self) { shoe in
-                 DetailView(selectedShoe: shoe)
             }
             .onAppear {
                 open(id: "HomeScrollView")

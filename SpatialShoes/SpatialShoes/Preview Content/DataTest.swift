@@ -62,7 +62,7 @@ extension Detail3DView {
 
 extension ShoeCard {
     static var preview: some View {
-        ShoeCard(shoe: .test, isNavigationCard: false, rotate: false)
+        ShoeCard(shoe: .test, isNavigationCard: false, rotate: false, isFav: false)
             .environment(ShoesViewModel(interactor: DataTest()))
     }
 }
@@ -99,6 +99,7 @@ extension Shoe {
         certifications: [
             "Producto Ecológico",
             "Certificación de Calidad"
-        ]
+        ],
+        isFav: false
     )
 }

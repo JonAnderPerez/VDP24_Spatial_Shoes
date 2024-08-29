@@ -16,10 +16,10 @@ struct ShoeCard: View {
     let isNavigationCard: Bool
     
     @State var rotate: Bool = false
+    @State var isFav: Bool
     
     var body: some View {
         ZStack {
-            
             //Stack para darle el efecto de hover unicamente al background
             if isNavigationCard {
                 NavigationLink(value: shoe) {
@@ -76,15 +76,18 @@ struct ShoeCard: View {
                         .lineLimit(2, reservesSpace: true)
                         .padding()
                     
-                    Button("Favorito", systemImage: "star") {
-                        
-                    }
-                    .buttonBorderShape(.circle)
-                    .labelStyle(.iconOnly)
-                    .padding()
+                    Toggle("Favorito", systemImage: "star", isOn: $isFav)
+                        .toggleStyle(.button)
+                        .buttonBorderShape(.circle)
+                        .labelStyle(.iconOnly)
+                        .padding()
                 }
             }
-        }.frame(width: 300)
+        }
+        .frame(width: 300)
+        .onChange(of: isFav) { _, _ in
+            vm.toggleFavShoe(id: shoe.id, isFav: isFav)
+        }
     }
 }
 

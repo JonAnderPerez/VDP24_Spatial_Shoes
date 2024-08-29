@@ -12,10 +12,17 @@ import Shoes
 struct DetailView: View {
     @Environment(ShoesViewModel.self) private var vm
     @Environment(\.openWindow) private var openWindow
+    @Environment(\.dismiss) private var dismiss
     
     @State var selectedShoe: Shoe
     
     @State private var parentEntity: Entity?
+    @State private var isFav: Bool
+    
+    init(selectedShoe: Shoe) {
+        self.selectedShoe = selectedShoe
+        _isFav = State(initialValue: selectedShoe.isFav)
+    }
     
     var body: some View {
         @Bindable var vmBindable = vm
@@ -25,10 +32,11 @@ struct DetailView: View {
                     Text(selectedShoe.name)
                         .font(.extraLargeTitle)
                     
-                    Button("Favorito", systemImage: "star") {
-                        
-                    }
-                    .labelStyle(.iconOnly)
+                    Toggle("Favorito", systemImage: "star", isOn: $isFav)
+                        .toggleStyle(.button)
+                        .buttonBorderShape(.circle)
+                        .labelStyle(.iconOnly)
+                        .padding()
                 }
                 
                 Text("\(selectedShoe.price.formatted(.number))€")
@@ -120,6 +128,12 @@ struct DetailView: View {
         .onChange(of: vm.rotate) { _, _ in
             //Anadimos la rotacion
             vm.rotateShoe(parentEntity!, rotate: vm.rotate)
+        }
+        .onChange(of: isFav) { _, _ in
+            vm.toggleFavShoe(id: selectedShoe.id, isFav: isFav)
+        }
+        .onDisappear {
+            dismiss()
         }
     }
     

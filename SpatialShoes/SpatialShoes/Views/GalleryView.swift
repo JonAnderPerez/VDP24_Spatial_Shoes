@@ -11,15 +11,21 @@ import Shoes
 
 struct GalleryView: View {
     @Environment(ShoesViewModel.self) private var vm
+    @Environment(\.openImmersiveSpace) private var openSpace
     
     private let gridItem: [GridItem] = [GridItem(.adaptive(minimum: 300))]
+    
+    @State private var isFilterShown = false
+    @State private var gShoes: [Shoe] = []
     
     var body: some View {
         NavigationStack {
             ScrollView {
                 LazyVGrid(columns: gridItem) {
-                    ForEach(vm.shoes) { shoe in
-                        ShoeCard(shoe: shoe, isNavigationCard: true)
+                    ForEach(gShoes) { shoe in
+                        if !isFilterShown {
+                            ShoeCard(shoe: shoe, isNavigationCard: true, isFav: shoe.isFav)
+                        }
                     }
                 }
             }
@@ -27,20 +33,37 @@ struct GalleryView: View {
             .safeAreaPadding(.horizontal)
             .scrollIndicators(.never)
             .navigationTitle("Spatial Shoes")
+            .navigationDestination(for: Shoe.self) { shoe in
+                 DetailView(selectedShoe: shoe)
+            }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("Filtros", systemImage: "line.3.horizontal.decrease") {
-
+                        isFilterShown = true
                     }
                 }
                 ToolbarItem(placement: .bottomOrnament) {
-                    Button("Carrousel immersivo", systemImage: "square.stack.3d.down.forward.fill") {
-                        
+                    Button {
+                        Task {
+                            await openSpace(id: "ImmersiveShowRoom")
+                        }
+                    } label: {
+                        Label("Carrousel immersivo", systemImage: "square.stack.3d.down.forward.fill")
                     }
                 }
             }
-            .navigationDestination(for: Shoe.self) { shoe in
-                 DetailView(selectedShoe: shoe)
+            .sheet(isPresented: $isFilterShown, content: {
+                Button("Filtros", systemImage: "line.3.horizontal.decrease") {
+                    isFilterShown = false
+                }
+            })
+            .onAppear {
+                print("Gallery onAppear")
+                gShoes = vm.shoes
+            }
+            .onDisappear {
+                print("Gallery onDismiss")
+                gShoes.removeAll() //TODO: HAY QUE MIRAR A VER POR QUE NO ACTUALIZA LA LISTA... ni borrando y volviendo a instanciarlo...
             }
         }
     }

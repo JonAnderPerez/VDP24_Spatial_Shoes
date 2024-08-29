@@ -13,8 +13,8 @@ struct HomeScrollView: View {
     var body: some View {
         ScrollView(.horizontal) {
             LazyHStack {
-                ForEach(vm.shoes) { shoe in
-                    ShoeCard(shoe: shoe, isNavigationCard: false)
+                ForEach(vm.shoes.filter({ $0.id != vm.selectedShoe?.id })) { shoe in
+                    ShoeCard(shoe: shoe, isNavigationCard: false, isFav: shoe.isFav)
                 }
             }
         }

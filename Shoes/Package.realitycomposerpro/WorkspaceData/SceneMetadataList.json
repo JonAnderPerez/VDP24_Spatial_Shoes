@@ -20,6 +20,18 @@
       }
     ]
   },
+  "0F171213-D48F-4549-98B4-BD59493AF1EB" : {
+    "objectMetadataList" : [
+      [
+        "0F171213-D48F-4549-98B4-BD59493AF1EB",
+        "Root"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      }
+    ]
+  },
   "3C984142-EFE5-4ABA-9EA9-14463B42D897" : {
     "objectMetadataList" : [
       [
@@ -144,26 +156,7 @@
     "objectMetadataList" : [
       [
         "5805A6FD-1F9D-4286-9675-28C058009100",
-        "Root",
-        "AirJordan",
-        "scene",
-        "Meshes"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "5805A6FD-1F9D-4286-9675-28C058009100",
-        "Root",
-        "AirJordan",
-        "scene",
-        "Meshes",
-        "Sketchfab_model",
-        "d8deb8ca54d7411c8d14a56540e715c4_fbx",
-        "RootNode",
-        "shoe",
-        "shoe_shoe_0"
+        "Root"
       ],
       {
         "isExpanded" : true,
@@ -173,35 +166,6 @@
         "5805A6FD-1F9D-4286-9675-28C058009100",
         "Root",
         "AirJordan"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "5805A6FD-1F9D-4286-9675-28C058009100",
-        "Root",
-        "AirJordan",
-        "scene",
-        "Meshes",
-        "Sketchfab_model",
-        "d8deb8ca54d7411c8d14a56540e715c4_fbx",
-        "RootNode",
-        "shoe",
-        "shoelace_shoelace_0"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "5805A6FD-1F9D-4286-9675-28C058009100",
-        "Root",
-        "AirJordan",
-        "scene",
-        "Meshes",
-        "Sketchfab_model",
-        "d8deb8ca54d7411c8d14a56540e715c4_fbx"
       ],
       {
         "isExpanded" : true,
@@ -237,15 +201,9 @@
         "Meshes",
         "Sketchfab_model",
         "d8deb8ca54d7411c8d14a56540e715c4_fbx",
-        "RootNode"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "5805A6FD-1F9D-4286-9675-28C058009100",
-        "Root"
+        "RootNode",
+        "shoe",
+        "shoelace_shoelace_0"
       ],
       {
         "isExpanded" : true,
@@ -261,6 +219,60 @@
         "d8deb8ca54d7411c8d14a56540e715c4_fbx",
         "RootNode",
         "shoe"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "5805A6FD-1F9D-4286-9675-28C058009100",
+        "Root",
+        "AirJordan",
+        "scene",
+        "Meshes",
+        "Sketchfab_model",
+        "d8deb8ca54d7411c8d14a56540e715c4_fbx",
+        "RootNode",
+        "shoe",
+        "shoe_shoe_0"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "5805A6FD-1F9D-4286-9675-28C058009100",
+        "Root",
+        "AirJordan",
+        "scene",
+        "Meshes",
+        "Sketchfab_model",
+        "d8deb8ca54d7411c8d14a56540e715c4_fbx"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "5805A6FD-1F9D-4286-9675-28C058009100",
+        "Root",
+        "AirJordan",
+        "scene",
+        "Meshes"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "5805A6FD-1F9D-4286-9675-28C058009100",
+        "Root",
+        "AirJordan",
+        "scene",
+        "Meshes",
+        "Sketchfab_model",
+        "d8deb8ca54d7411c8d14a56540e715c4_fbx",
+        "RootNode"
       ],
       {
         "isExpanded" : true,
@@ -328,10 +340,34 @@
       }
     ]
   },
+  "B87757C2-5F26-454D-9FF7-2F7BCD8FE834" : {
+    "objectMetadataList" : [
+      [
+        "B87757C2-5F26-454D-9FF7-2F7BCD8FE834",
+        "Root"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      }
+    ]
+  },
   "D0BB3B89-C49D-463A-A0C1-EF6550CFC768" : {
     "objectMetadataList" : [
       [
         "D0BB3B89-C49D-463A-A0C1-EF6550CFC768",
+        "Root"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      }
+    ]
+  },
+  "DD0D5BDE-FFEB-48F8-AB08-639400A14A20" : {
+    "objectMetadataList" : [
+      [
+        "DD0D5BDE-FFEB-48F8-AB08-639400A14A20",
         "Root"
       ],
       {

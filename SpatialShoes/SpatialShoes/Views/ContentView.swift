@@ -12,6 +12,7 @@ struct ContentView: View {
     @Environment(ShoesViewModel.self) private var vm
     
     var body: some View {
+        @Bindable var vmBindable = vm
         TabView {
             HomeView()
                 .tabItem {
@@ -27,6 +28,9 @@ struct ContentView: View {
                 .tabItem {
                     Label("Favoritos", systemImage: "star.fill")
                 }
+        }
+        .alert("Spatial Shoes Error", isPresented: $vmBindable.showAlert, actions: {}) {
+            Text(vmBindable.errorMsg)
         }
     }
 }

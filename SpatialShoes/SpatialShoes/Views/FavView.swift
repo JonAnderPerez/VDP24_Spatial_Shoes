@@ -18,8 +18,8 @@ struct FavView: View {
         NavigationStack {
             ScrollView {
                 LazyVGrid(columns: gridItem) {
-                    ForEach(vm.shoes) { shoe in
-                        ShoeCard(shoe: shoe, isNavigationCard: true, rotate: true)
+                    ForEach(vm.shoes.filter({ $0.isFav })) { shoe in
+                        ShoeCard(shoe: shoe, isNavigationCard: true, rotate: true, isFav: shoe.isFav)
                     }
                 }
             }

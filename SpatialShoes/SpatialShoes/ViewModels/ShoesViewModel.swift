@@ -11,10 +11,22 @@ import Combine
 
 @Observable
 final class ShoesViewModel {
+
     let interactor: DataInteractor
     
-    var shoes: [Shoe]
     var selectedShoe: Shoe?
+    
+    private var favShoesIndex: [FavShoe]
+    
+    private let privShoes: [Shoe]
+    var shoes: [Shoe] {
+        privShoes.map { shoe in
+            var newShoe = shoe
+            newShoe.isFav = favShoesIndex.contains(where: { $0.id == shoe.id })
+            //print("Shoe: \(newShoe.name) - isFav: \(favShoesIndex.contains(where: { $0.id == shoe.id }))")
+            return newShoe
+        }
+    }
     
     var rotate = false
     
@@ -27,19 +39,23 @@ final class ShoesViewModel {
         GestureComponent.registerComponent()
         
         self.interactor = interactor
+        self.favShoesIndex = []
         do {
-            self.shoes = try interactor.getShoes()
+            self.privShoes = try interactor.getShoes()
             self.selectedShoe = shoes.randomElement()
         } catch {
-            self.shoes = []
+            self.privShoes = []
+            print("Error en la carga del JSON de zapatillas: \(error)")
             errorMsg = "Error en la carga del JSON de zapatillas: \(error)"
             showAlert.toggle()
         }
+        
+        Task {
+            await fetchFavShoes()
+        }
     }
-    
-    func selectRandom() {
-        selectedShoe = shoes.randomElement()
-    }
+
+    // Shoe functions
     
     func getColor(_ shoeColor: ShoeColor) -> Color {
         switch shoeColor {
@@ -54,6 +70,51 @@ final class ShoesViewModel {
         }
     }
     
+    // Fav functions
+    @MainActor func toggleFavShoe(id: Int, isFav: Bool) {
+        print("toggleFavShoe: \(isFav)")
+        if !isFav {
+            removeShoeFromFav(id: id)
+        } else {
+            addShoeToFav(id: id)
+        }
+        fetchFavShoes()
+    }
+    
+    @MainActor func addShoeToFav(id: Int) {
+        do {
+            try FavShoeInteractor.shared.appendFav(item: FavShoe(id: id))
+        } catch {
+            print("Error al guardar la zapatilla \(id) en favoritos: \(error)")
+            errorMsg = "Error al guardar la zapatilla \(id) en favoritos: \(error)"
+            showAlert.toggle()
+        }
+    }
+    
+    @MainActor func removeShoeFromFav(id: Int) {
+        do {
+            guard let favShoe = self.favShoesIndex.first(where: { $0.id == id }) else {
+                return
+            }
+            try FavShoeInteractor.shared.removeFav(favShoe)
+        } catch {
+            print("Error al eliminar la zapatilla \(id) en favoritos: \(error)")
+            errorMsg = "Error al eliminar la zapatilla \(id) en favoritos: \(error)"
+            showAlert.toggle()
+        }
+    }
+    
+    @MainActor private func fetchFavShoes() {
+        do {
+            self.favShoesIndex = try FavShoeInteractor.shared.fetchFav()
+            print("fetchFavShoes: \(self.favShoesIndex.count)")
+        } catch {
+            print("Error al recuperar las zapatillas en favoritos: \(error)")
+            self.favShoesIndex = []
+        }
+    }
+    
+    // 3D Model functions
     @MainActor func modifySmallShoeScaleAndPosition(_ shoeEntity: Entity) {
         shoeEntity.scale *= 0.0025
         shoeEntity.position = [0, -0.03, 0]
@@ -86,6 +147,19 @@ final class ShoesViewModel {
         shoeEntity.components.set(InputTargetComponent())
         
         let gestureComponent = GestureComponent()
+        shoeEntity.components.set(gestureComponent)
+    }
+    
+    @MainActor func modifyImmersiveShoeScaleAndPosition(_ shoeEntity: Entity) {
+        shoeEntity.scale *= 0.005
+        shoeEntity.position = [0, -0.03, 0]
+        
+        // Info: Con las colisiones generadas por shoeEntity.generateCollisionShapes(recursive: true) no interactua con InputTargetComponent, ni con las colisiones generadas desde RCP
+        shoeEntity.components.set(CollisionComponent(shapes: [.generateBox(width: 30, height: 60, depth: 30)
+                                                                    .offsetBy(translation: [0, 0, 15])]))
+        shoeEntity.components.set(InputTargetComponent())
+        
+        let gestureComponent = GestureComponent(resetOnEnded: true)
         shoeEntity.components.set(gestureComponent)
     }
 
