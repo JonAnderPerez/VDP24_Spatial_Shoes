@@ -62,7 +62,7 @@ extension Detail3DView {
 
 extension ShoeCard {
     static var preview: some View {
-        ShoeCard(shoe: .test, isNavigationCard: false, rotate: false, isFav: false)
+        ShoeCard(shoe: .test, isNavigationCard: false, rotate: false, isFav: .constant(false))
             .environment(ShoesViewModel(interactor: DataTest()))
     }
 }

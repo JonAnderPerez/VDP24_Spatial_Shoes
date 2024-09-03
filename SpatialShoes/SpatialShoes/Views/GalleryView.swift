@@ -15,14 +15,12 @@ struct GalleryView: View {
     
     private let gridItem: [GridItem] = [GridItem(.adaptive(minimum: 300))]
     
-    @State private var gShoes: [Shoe] = []
-    
     var body: some View {
         NavigationStack {
             ScrollView {
                 LazyVGrid(columns: gridItem) {
-                    ForEach(gShoes) { shoe in
-                        ShoeCard(shoe: shoe, isNavigationCard: true, isFav: shoe.isFav)
+                    ForEach(vm.shoes, id: \.id) { shoe in
+                        ShoeCard(shoe: shoe, isNavigationCard: true, rotate: false, isFav: .init(get: { shoe.isFav }, set: { newVal in vm.toggleFavShoe(id: shoe.id, isFav: newVal) }))
                     }
                 }
             }
@@ -43,14 +41,6 @@ struct GalleryView: View {
                         Label("Carrousel immersivo", systemImage: "square.stack.3d.down.forward.fill")
                     }
                 }
-            }
-            .onAppear {
-                print("Gallery onAppear")
-                gShoes = vm.shoes
-            }
-            .onDisappear {
-                print("Gallery onDismiss")
-                gShoes.removeAll() //TODO: HAY QUE MIRAR A VER POR QUE NO ACTUALIZA LA LISTA... ni borrando y volviendo a instanciarlo...
             }
         }
     }

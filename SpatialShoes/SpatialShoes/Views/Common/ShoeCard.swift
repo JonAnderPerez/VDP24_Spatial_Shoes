@@ -16,7 +16,7 @@ struct ShoeCard: View {
     let isNavigationCard: Bool
     
     @State var rotate: Bool = false
-    @State var isFav: Bool
+    @Binding var isFav: Bool
     
     var body: some View {
         ZStack {

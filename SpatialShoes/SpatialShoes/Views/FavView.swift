@@ -19,7 +19,7 @@ struct FavView: View {
             ScrollView {
                 LazyVGrid(columns: gridItem) {
                     ForEach(vm.shoes.filter({ $0.isFav })) { shoe in
-                        ShoeCard(shoe: shoe, isNavigationCard: true, rotate: true, isFav: shoe.isFav)
+                        ShoeCard(shoe: shoe, isNavigationCard: true, rotate: true, isFav: .init(get: { shoe.isFav }, set: { newVal in vm.toggleFavShoe(id: shoe.id, isFav: newVal) }))
                     }
                 }
             }
