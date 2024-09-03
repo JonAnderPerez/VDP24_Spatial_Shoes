@@ -8,7 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		8B3055582C764822001FAB8B /* ShoeCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3055572C764822001FAB8B /* ShoeCard.swift */; };
-		8B30555A2C7659AE001FAB8B /* HomeScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3055592C7659AE001FAB8B /* HomeScrollView.swift */; };
+		8B30555A2C7659AE001FAB8B /* ShoesScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3055592C7659AE001FAB8B /* ShoesScrollView.swift */; };
+		8B3D00A82C875B7100D7DD52 /* ShoesTest.json in Resources */ = {isa = PBXBuildFile; fileRef = 8B3D00A72C875B7100D7DD52 /* ShoesTest.json */; };
+		8B3D00AC2C87676100D7DD52 /* FlexibleTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3D00AB2C87676100D7DD52 /* FlexibleTextView.swift */; };
+		8B3D00AE2C876B5E00D7DD52 /* FlexibleColorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3D00AD2C876B5E00D7DD52 /* FlexibleColorView.swift */; };
 		8B9889432C7DF463002827DE /* FavInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9889422C7DF463002827DE /* FavInteractor.swift */; };
 		8BA7984F2C6F970A008437D4 /* SpatialShoesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA7984E2C6F970A008437D4 /* SpatialShoesApp.swift */; };
 		8BA798512C6F970A008437D4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA798502C6F970A008437D4 /* ContentView.swift */; };
@@ -34,7 +37,10 @@
 
 /* Begin PBXFileReference section */
 		8B3055572C764822001FAB8B /* ShoeCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoeCard.swift; sourceTree = "<group>"; };
-		8B3055592C7659AE001FAB8B /* HomeScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScrollView.swift; sourceTree = "<group>"; };
+		8B3055592C7659AE001FAB8B /* ShoesScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoesScrollView.swift; sourceTree = "<group>"; };
+		8B3D00A72C875B7100D7DD52 /* ShoesTest.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ShoesTest.json; sourceTree = "<group>"; };
+		8B3D00AB2C87676100D7DD52 /* FlexibleTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlexibleTextView.swift; sourceTree = "<group>"; };
+		8B3D00AD2C876B5E00D7DD52 /* FlexibleColorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlexibleColorView.swift; sourceTree = "<group>"; };
 		8B9889422C7DF463002827DE /* FavInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavInteractor.swift; sourceTree = "<group>"; };
 		8BA798472C6F970A008437D4 /* SpatialShoes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpatialShoes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BA7984E2C6F970A008437D4 /* SpatialShoesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpatialShoesApp.swift; sourceTree = "<group>"; };
@@ -76,6 +82,8 @@
 			isa = PBXGroup;
 			children = (
 				8B3055572C764822001FAB8B /* ShoeCard.swift */,
+				8B3D00AB2C87676100D7DD52 /* FlexibleTextView.swift */,
+				8B3D00AD2C876B5E00D7DD52 /* FlexibleColorView.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -127,6 +135,7 @@
 			children = (
 				8BA798552C6F970B008437D4 /* Preview Assets.xcassets */,
 				8BA7986B2C6F9CB0008437D4 /* DataTest.swift */,
+				8B3D00A72C875B7100D7DD52 /* ShoesTest.json */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
@@ -146,7 +155,7 @@
 				8B3055562C764811001FAB8B /* Common */,
 				8BA798502C6F970A008437D4 /* ContentView.swift */,
 				8BA798702C6FA146008437D4 /* HomeView.swift */,
-				8B3055592C7659AE001FAB8B /* HomeScrollView.swift */,
+				8B3055592C7659AE001FAB8B /* ShoesScrollView.swift */,
 				8BA798722C6FA156008437D4 /* GalleryView.swift */,
 				8BA798742C6FA169008437D4 /* FavView.swift */,
 				8BA798762C6FA172008437D4 /* DetailView.swift */,
@@ -284,6 +293,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B3D00A82C875B7100D7DD52 /* ShoesTest.json in Resources */,
 				8BA798562C6F970B008437D4 /* Preview Assets.xcassets in Resources */,
 				8BA798622C6F9A2E008437D4 /* Shoes.json in Resources */,
 				8BA798532C6F970B008437D4 /* Assets.xcassets in Resources */,
@@ -298,9 +308,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				8BA798672C6F9A90008437D4 /* JSONInteractor.swift in Sources */,
+				8B3D00AE2C876B5E00D7DD52 /* FlexibleColorView.swift in Sources */,
 				8B9889432C7DF463002827DE /* FavInteractor.swift in Sources */,
 				8BA7986C2C6F9CB0008437D4 /* DataTest.swift in Sources */,
-				8B30555A2C7659AE001FAB8B /* HomeScrollView.swift in Sources */,
+				8B30555A2C7659AE001FAB8B /* ShoesScrollView.swift in Sources */,
 				8BDCE4372C74BAD1001F45F2 /* GestureComponent.swift in Sources */,
 				8BA7986F2C6F9F9B008437D4 /* ShoesViewModel.swift in Sources */,
 				8BA798652C6F9A69008437D4 /* DataInteractor.swift in Sources */,
@@ -312,6 +323,7 @@
 				8BA798752C6FA169008437D4 /* FavView.swift in Sources */,
 				8BA9D16C2C7F49C80025D87F /* StoreView.swift in Sources */,
 				8BA7986A2C6F9B55008437D4 /* Shoe.swift in Sources */,
+				8B3D00AC2C87676100D7DD52 /* FlexibleTextView.swift in Sources */,
 				8BA798732C6FA156008437D4 /* GalleryView.swift in Sources */,
 				8BA7984F2C6F970A008437D4 /* SpatialShoesApp.swift in Sources */,
 				8BA9D16A2C7F0E4C0025D87F /* ShowRoomView.swift in Sources */,

@@ -5,7 +5,7 @@
 //  Created by Deusto SEIDOR on 16/8/24.
 //
 
-import Foundation
+import SwiftUI
 import SwiftData
 
 enum ShoeColor: String, Codable, CaseIterable {

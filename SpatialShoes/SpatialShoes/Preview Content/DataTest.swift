@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct DataTest: DataInteractor {
-    var url: URL { Bundle.main.url(forResource: "Shoes", withExtension: "json")! }
+    var url: URL { Bundle.main.url(forResource: "ShoesTest", withExtension: "json")! }
 }
 
 extension ContentView {
@@ -25,9 +25,9 @@ extension HomeView {
     }
 }
 
-extension HomeScrollView {
+extension ShoesScrollView {
     static var preview: some View {
-        HomeScrollView()
+        ShoesScrollView()
             .environment(ShoesViewModel(interactor: DataTest()))
     }
 }
@@ -78,14 +78,27 @@ extension Shoe {
             42,
             43,
             44,
-            45
+            45,
+            46,
+            47,
+            48,
+            49,
+            50
         ],
         price: 199.99,
-        description: "Domina la cancha con nuestras Sky Dunk de Athletica. Diseñadas para los amantes del baloncesto, estas zapatillas ofrecen una combinación ideal de soporte, durabilidad y estilo. Inspiradas en los clásicos del baloncesto, las Sky Dunk están listas para elevar tu juego.\nCaracterísticas destacadas:\n- Material: Construcción en cuero y malla para un equilibrio perfecto entre soporte y transpirabilidad.\n- Diseño: Estilo icónico y moderno, ideal para destacar en la cancha.\n- Comodidad: Amortiguación avanzada y soporte en el tobillo para movimientos rápidos y saltos explosivos.\n- Versatilidad: Perfectas para entrenamientos, partidos y uso casual. Disponibles en varias tallas.\nLleva tu juego al siguiente nivel con nuestras Sky Dunk y siente la diferencia en cada salto y aterrizaje.",
+        description: "Domina la cancha con nuestras **Sky Dunk** de Athletica. Diseñadas para los amantes del baloncesto, estas zapatillas ofrecen una combinación ideal de soporte, durabilidad y estilo. Inspiradas en los clásicos del baloncesto, las Sky Dunk están listas para elevar tu juego.\nCaracterísticas destacadas:\n- Material: Construcción en cuero y malla para un equilibrio perfecto entre soporte y transpirabilidad.\n- Diseño: Estilo icónico y moderno, ideal para destacar en la cancha.\n- Comodidad: Amortiguación avanzada y soporte en el tobillo para movimientos rápidos y saltos explosivos.\n- Versatilidad: Perfectas para entrenamientos, partidos y uso casual. Disponibles en varias tallas.\nLleva tu juego al siguiente nivel con nuestras Sky Dunk y siente la diferencia en cada salto y aterrizaje.",
         model3DName: "AirJordan",
         type: "Deportivas",
         materials: [
-            "Cuero"
+            "Cuero",
+            "Cuero 2",
+            "Cuero 3",
+            "Cuero 4",
+            "Cuero 5",
+            "Cuero 6",
+            "Cuero 7",
+            "Cuero 8",
+            "Cuero 9"
         ],
         origin: "Japón",
         gender: "Unisex",
@@ -93,12 +106,14 @@ extension Shoe {
         colors: [
             .red,
             .white,
-            .black
+            .black,
         ],
         warranty: 2,
         certifications: [
             "Producto Ecológico",
-            "Certificación de Calidad"
+            "Certificación de Calidad",
+            "Certificación de Calidad 2",
+            "Certificación de Calidad 3",
         ],
         isFav: false
     )

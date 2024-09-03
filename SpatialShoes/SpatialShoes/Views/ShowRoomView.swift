@@ -14,44 +14,56 @@ struct ShowRoomView: View {
     @Environment(\.dismissWindow) private var dismiss
     @Environment(\.openWindow) private var open
     @Environment(\.openImmersiveSpace) private var openSpace
+    @Environment(\.dismissImmersiveSpace) private var dismissSpace
     
     let handAnchor = AnchorEntity(.head, trackingMode: .once)
     
-    @State private var parentEntity: Entity?
+    //@State private var parentEntity: Entity?
     
     var body: some View {
         ZStack {
             StoreView() // Para poder usar el espacio immersivo en Vision 1.2
             
-            RealityView { content in
+            RealityView { content, attachments in
                 do {
                     if let selectedShoe = vm.selectedShoe {
                         let shoeEntity = try await Entity(named: selectedShoe.model3DName, in: shoesBundle)
+                        shoeEntity.name = "ShoeChild"
                         
-                        parentEntity = Entity()
-                        parentEntity!.addChild(shoeEntity)
+                        let parentEntity = Entity()
+                        parentEntity.name = "ParentEntity"
+                        parentEntity.addChild(shoeEntity)
                         
                         //Anadimos la zapatilla a la escena
-                        parentEntity!.setParent(handAnchor)
-                        parentEntity!.position = [0, -0.15, -0.6]
+                        parentEntity.setParent(handAnchor)
+                        parentEntity.position = [0, -0.15, -0.6]
                         
                         //Modificamos la zapatilla
                         vm.modifyImmersiveShoeScaleAndPosition(shoeEntity)
+                        
+                        if let dismissButton = attachments.entity(for: "dismissButton") {
+                            parentEntity.addChild(dismissButton)
+                            dismissButton.position = [0, -0.15, 0];
+                        }
                     }
                     
                     content.add(handAnchor)
                 } catch {
                     print("Error al cargar las zapatillas: \(error)")
                 }
-            } update: { content in
-                if let selectedShoe = vm.selectedShoe, let childEntity = parentEntity?.children.first {
-                    parentEntity?.removeChild(childEntity)
+            } update: { content, _ in
+                if let selectedShoe = vm.selectedShoe,
+                    let anchor = content.entities.first,
+                    let parentEntity = anchor.findEntity(named: "ParentEntity"),
+                    let childEntity = parentEntity.findEntity(named: "ShoeChild") {
+                    parentEntity.removeChild(childEntity)
                     
                     Task {
                         do {
                             let shoeEntity = try await Entity(named: selectedShoe.model3DName, in: shoesBundle)
+                            shoeEntity.name = "ShoeChild"
                             
-                            parentEntity!.addChild(shoeEntity)
+                            parentEntity.addChild(shoeEntity)
                             
                             //Modificamos la zapatilla
                             vm.modifyImmersiveShoeScaleAndPosition(shoeEntity)
@@ -60,12 +72,24 @@ struct ShowRoomView: View {
                         }
                     }
                 }
-            }.installGestures()
+            } attachments: {
+                Attachment(id: "dismissButton") {
+                    Button("Cerrar carrusel immersivo", systemImage: "xmark") {
+                        Task {
+                            dismiss(id: "ShoesScrollView")
+                            await dismissSpace()
+                        }
+                    }
+                    .buttonBorderShape(.circle)
+                    .labelStyle(.iconOnly)
+                }
+            }
+            .installGestures()
         }
         .onAppear {
             dismiss(id: "MainContent")
             dismiss(id: "ShoeDetail3D")
-            open(id: "HomeScrollView")
+            open(id: "ShoesScrollView")
         }
         .onDisappear {
             open(id: "MainContent")
@@ -83,8 +107,4 @@ struct ShowRoomView: View {
          }
          */
     }
-}
-
-#Preview {
-    ShowRoomView()
 }

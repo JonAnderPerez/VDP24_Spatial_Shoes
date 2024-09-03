@@ -15,7 +15,6 @@ struct GalleryView: View {
     
     private let gridItem: [GridItem] = [GridItem(.adaptive(minimum: 300))]
     
-    @State private var isFilterShown = false
     @State private var gShoes: [Shoe] = []
     
     var body: some View {
@@ -23,9 +22,7 @@ struct GalleryView: View {
             ScrollView {
                 LazyVGrid(columns: gridItem) {
                     ForEach(gShoes) { shoe in
-                        if !isFilterShown {
-                            ShoeCard(shoe: shoe, isNavigationCard: true, isFav: shoe.isFav)
-                        }
+                        ShoeCard(shoe: shoe, isNavigationCard: true, isFav: shoe.isFav)
                     }
                 }
             }
@@ -37,11 +34,6 @@ struct GalleryView: View {
                  DetailView(selectedShoe: shoe)
             }
             .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button("Filtros", systemImage: "line.3.horizontal.decrease") {
-                        isFilterShown = true
-                    }
-                }
                 ToolbarItem(placement: .bottomOrnament) {
                     Button {
                         Task {
@@ -52,11 +44,6 @@ struct GalleryView: View {
                     }
                 }
             }
-            .sheet(isPresented: $isFilterShown, content: {
-                Button("Filtros", systemImage: "line.3.horizontal.decrease") {
-                    isFilterShown = false
-                }
-            })
             .onAppear {
                 print("Gallery onAppear")
                 gShoes = vm.shoes

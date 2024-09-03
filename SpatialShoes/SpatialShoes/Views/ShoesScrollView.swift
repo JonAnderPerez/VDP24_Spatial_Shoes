@@ -1,5 +1,5 @@
 //
-//  HomeScrollView.swift
+//  ShoesScrollView.swift
 //  SpatialShoes
 //
 //  Created by Deusto SEIDOR on 21/8/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct HomeScrollView: View {
+struct ShoesScrollView: View {
     @Environment(ShoesViewModel.self) private var vm
     
     var body: some View {
@@ -26,5 +26,5 @@ struct HomeScrollView: View {
 }
 
 #Preview(windowStyle: .plain) {
-    HomeScrollView.preview
+    ShoesScrollView.preview
 }

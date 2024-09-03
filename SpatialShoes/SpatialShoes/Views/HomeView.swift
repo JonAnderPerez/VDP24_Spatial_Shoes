@@ -26,7 +26,7 @@ struct HomeView: View {
                             Text(selectedShoe.name)
                                 .font(.extraLargeTitle)
                             
-                            Text(selectedShoe.description)
+                            Text(LocalizedStringKey(selectedShoe.description))
                                 .font(.title2)
                                 .foregroundStyle(.secondary)
                             
@@ -122,10 +122,10 @@ struct HomeView: View {
                 vm.rotateShoe(parentEntity!, rotate: vm.rotate)
             }
             .onAppear {
-                open(id: "HomeScrollView")
+                open(id: "ShoesScrollView")
             }
             .onDisappear {
-                dismiss(id: "HomeScrollView")
+                dismiss(id: "ShoesScrollView")
             }
         }
     }

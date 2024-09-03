@@ -12,6 +12,7 @@ import Shoes
 struct DetailView: View {
     @Environment(ShoesViewModel.self) private var vm
     @Environment(\.openWindow) private var openWindow
+    @Environment(\.dismissWindow) private var dismissWindow
     @Environment(\.dismiss) private var dismiss
     
     @State var selectedShoe: Shoe
@@ -48,7 +49,7 @@ struct DetailView: View {
                 
                 ScrollView {
                     VStack(alignment: .leading, spacing: 16) {
-                        Text(selectedShoe.description)
+                        Text(LocalizedStringKey(selectedShoe.description))
                             .font(.title2)
                             .foregroundStyle(.secondary)
                         
@@ -64,7 +65,7 @@ struct DetailView: View {
                         detailItemList(type: "Certificaciónes:", values: selectedShoe.certifications)
                     }
                 }
-                .scrollIndicators(.never)
+                .scrollIndicators(.visible)
             }
 
             Spacer()
@@ -133,6 +134,7 @@ struct DetailView: View {
             vm.toggleFavShoe(id: selectedShoe.id, isFav: isFav)
         }
         .onDisappear {
+            dismissWindow(id: "ShoeDetail3D")
             dismiss()
         }
     }
@@ -150,18 +152,13 @@ struct DetailView: View {
     }
     
     func detailItemList(type: String, values: [String]) -> some View {
-        HStack {
+        HStack(alignment: .top) {
             Text(type)
                 .font(.title)
                 .foregroundStyle(.secondary)
+                .padding(.top, 24)
             
-            ForEach(values, id: \.self) { value in
-                Text(value)
-                    .font(.largeTitle)
-                    .foregroundStyle(.primary)
-                    .padding()
-                    .glassBackgroundEffect()
-            }
+            FlexibleTextView(data: values, spacing: 8)
         }
     }
     
@@ -171,12 +168,7 @@ struct DetailView: View {
                 .font(.title)
                 .foregroundStyle(.secondary)
             
-            ForEach(values, id: \.self) { shoeColor in
-                Circle()
-                    .frame(width: 32, height: 32)
-                    .padding(.trailing, 8)
-                    .foregroundStyle(vm.getColor(shoeColor))
-            }
+            FlexibleColorView(data: values, spacing: 8)
         }
     }
 }

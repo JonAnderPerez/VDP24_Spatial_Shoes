@@ -19,8 +19,8 @@ struct SpatialShoesApp: App {
         }
         
         // Scroll de items para la home
-        WindowGroup(id: "HomeScrollView") {
-            HomeScrollView()
+        WindowGroup(id: "ShoesScrollView") {
+            ShoesScrollView()
                 .environment(shoesVM)
         }
         .windowStyle(.plain)
