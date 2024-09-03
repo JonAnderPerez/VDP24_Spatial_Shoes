@@ -80,25 +80,25 @@ public struct GestureComponent: Component, Codable {
     mutating func onChanged(value: EntityTargetValue<DragGesture.Value>) {
         // Verificar si se permite arrastrar la entidad.
         guard canDrag else { return }
-        
+
         let state = EntityGestureState.shared
         
-        // Solo permitir que una única entidad sea seleccionada en un momento dado.
-        if state.targetedEntity == nil {
+        // Actualizar la entidad en caso de cambio unicamente
+        if state.targetedEntity != value.entity {
             state.targetedEntity = value.entity
             state.initialOrientation = value.entity.orientation(relativeTo: nil)
         }
         
         // Asegurarse de que hay una entidad seleccionada.
         guard let entity = state.targetedEntity else { fatalError("El gesto no contiene una entidad") }
-        
+
         // Si no se está arrastrando, inicializar el estado de arrastre.
         if !state.isDragging {
             state.isDragging = true
             state.dragStartPosition = entity.scenePosition
             state.initialOrientation = .init(entity.orientation(relativeTo: nil))
         }
-        
+
         // Convertir la traslación 3D al espacio de la escena.
         let translation3D = value.convert(value.gestureValue.translation3D, from: .local, to: .scene)
         
