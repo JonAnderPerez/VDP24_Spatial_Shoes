@@ -3,8 +3,7 @@
     "objectMetadataList" : [
       [
         "0D44725A-9684-4064-A902-A4C2B19CB2C2",
-        "Root",
-        "MoonShoes"
+        "Root"
       ],
       {
         "isExpanded" : true,
@@ -12,7 +11,8 @@
       },
       [
         "0D44725A-9684-4064-A902-A4C2B19CB2C2",
-        "Root"
+        "Root",
+        "MoonShoes"
       ],
       {
         "isExpanded" : true,
@@ -156,7 +156,28 @@
     "objectMetadataList" : [
       [
         "5805A6FD-1F9D-4286-9675-28C058009100",
-        "Root"
+        "Root",
+        "AirJordan",
+        "scene",
+        "Meshes",
+        "Sketchfab_model",
+        "d8deb8ca54d7411c8d14a56540e715c4_fbx",
+        "RootNode",
+        "shoe",
+        "shoe_shoe_0"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "5805A6FD-1F9D-4286-9675-28C058009100",
+        "Root",
+        "AirJordan",
+        "scene",
+        "Meshes",
+        "Sketchfab_model",
+        "d8deb8ca54d7411c8d14a56540e715c4_fbx"
       ],
       {
         "isExpanded" : true,
@@ -166,6 +187,14 @@
         "5805A6FD-1F9D-4286-9675-28C058009100",
         "Root",
         "AirJordan"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "5805A6FD-1F9D-4286-9675-28C058009100",
+        "Root"
       ],
       {
         "isExpanded" : true,
@@ -187,7 +216,9 @@
         "AirJordan",
         "scene",
         "Meshes",
-        "Sketchfab_model"
+        "Sketchfab_model",
+        "d8deb8ca54d7411c8d14a56540e715c4_fbx",
+        "RootNode"
       ],
       {
         "isExpanded" : true,
@@ -230,24 +261,7 @@
         "AirJordan",
         "scene",
         "Meshes",
-        "Sketchfab_model",
-        "d8deb8ca54d7411c8d14a56540e715c4_fbx",
-        "RootNode",
-        "shoe",
-        "shoe_shoe_0"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "5805A6FD-1F9D-4286-9675-28C058009100",
-        "Root",
-        "AirJordan",
-        "scene",
-        "Meshes",
-        "Sketchfab_model",
-        "d8deb8ca54d7411c8d14a56540e715c4_fbx"
+        "Sketchfab_model"
       ],
       {
         "isExpanded" : true,
@@ -259,20 +273,6 @@
         "AirJordan",
         "scene",
         "Meshes"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "5805A6FD-1F9D-4286-9675-28C058009100",
-        "Root",
-        "AirJordan",
-        "scene",
-        "Meshes",
-        "Sketchfab_model",
-        "d8deb8ca54d7411c8d14a56540e715c4_fbx",
-        "RootNode"
       ],
       {
         "isExpanded" : true,

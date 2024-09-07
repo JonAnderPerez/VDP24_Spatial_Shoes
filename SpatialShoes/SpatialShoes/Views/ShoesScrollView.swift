@@ -14,7 +14,7 @@ struct ShoesScrollView: View {
         ScrollView(.horizontal) {
             LazyHStack {
                 ForEach(vm.shoes.filter({ $0.id != vm.selectedShoe?.id })) { shoe in
-                    ShoeCard(shoe: shoe, isNavigationCard: true, rotate: false, isFav: .init(get: { shoe.isFav }, set: { newVal in vm.toggleFavShoe(id: shoe.id, isFav: newVal) }))
+                    ShoeCard(shoe: shoe, isNavigationCard: false, rotate: false, isFav: .init(get: { shoe.isFav }, set: { newVal in vm.toggleFavShoe(id: shoe.id, isFav: newVal) }))
                 }
             }
         }

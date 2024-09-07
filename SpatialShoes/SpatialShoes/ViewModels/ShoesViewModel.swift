@@ -13,6 +13,7 @@ import Combine
 final class ShoesViewModel {
 
     let interactor: DataInteractor
+    let rotationManager: RotationManager
     
     var selectedShoe: Shoe?
     
@@ -23,7 +24,6 @@ final class ShoesViewModel {
         privShoes.map { shoe in
             var newShoe = shoe
             newShoe.isFav = favShoesIndex.contains(where: { $0.id == shoe.id })
-            //print("Shoe: \(newShoe.name) - isFav: \(favShoesIndex.contains(where: { $0.id == shoe.id }))")
             return newShoe
         }
     }
@@ -37,6 +37,8 @@ final class ShoesViewModel {
     
     init(interactor: DataInteractor = Interactor()) {
         GestureComponent.registerComponent()
+        
+        self.rotationManager = RotationManager()
         
         self.interactor = interactor
         self.favShoesIndex = []
@@ -72,7 +74,6 @@ final class ShoesViewModel {
     
     // Fav functions
     @MainActor func toggleFavShoe(id: Int, isFav: Bool) {
-        print("toggleFavShoe: \(isFav)")
         if !isFav {
             removeShoeFromFav(id: id)
         } else {
@@ -107,7 +108,6 @@ final class ShoesViewModel {
     @MainActor private func fetchFavShoes() {
         do {
             self.favShoesIndex = try FavShoeInteractor.shared.fetchFav()
-            print("fetchFavShoes: \(self.favShoesIndex.count)")
         } catch {
             print("Error al recuperar las zapatillas en favoritos: \(error)")
             self.favShoesIndex = []
@@ -164,40 +164,15 @@ final class ShoesViewModel {
     }
 
     func rotateShoe(_ shoeEntity: Entity, rotate: Bool = true) {
-        
-        if !rotate {
-            rotationTimers.removeAll()
-            return
+        if rotate {
+            rotationManager.startRotation()
+            rotationManager.registerEntity(shoeEntity)
+        } else {
+            rotationManager.unregisterEntity(shoeEntity)
         }
-        
-        let rotationInterval: TimeInterval = 10.0 // Duración de una rotación completa en segundos
-        let degreesPerSecond = 360.0 / rotationInterval // Grados por segundo
-        let timerInterval: TimeInterval = 0.03 // Intervalo del timer en segundos
-        let degreesPerTick = Float(degreesPerSecond * timerInterval) // Grados por cada tick del timer
-
-        var currentRotation: Float = 0.0
-        
-        // Almacenar la rotación inicial
-        let initialRotation = shoeEntity.transform.rotation
-
-        let timer = Timer.publish(every: timerInterval, on: .main, in: .common)
-            .autoconnect()
-            .sink { _ in
-                currentRotation += degreesPerTick
-
-                // Reiniciar el ángulo si supera los 360 grados
-                if currentRotation >= 360 {
-                    currentRotation -= 360
-                }
-
-                // Crear la rotación incremental alrededor del eje Y
-                let incrementalRotation = simd_quatf(angle: currentRotation * .pi / 180, axis: [0, 1, 0])
-
-                // Aplicar la rotación incremental sobre la rotación inicial
-                shoeEntity.transform.rotation = initialRotation * incrementalRotation
-            }
-        
-        rotationTimers.append(timer)
     }
-
+    
+    func rotateUniqueShoe(_ shoeEntity: Entity, rotate: Bool = true) {
+        rotationManager.rotateUniqueShoe(shoeEntity, rotate: rotate)
+    }
 }

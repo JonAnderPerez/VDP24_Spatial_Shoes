@@ -10,19 +10,25 @@
 
 def Xform "Root"
 {
-    reorder nameChildren = ["FemaleShoes", "shop_v2"]
+    reorder nameChildren = ["shop_v2", "IBL"]
     def "shop_v2" (
         active = true
         customData = {
             float3 rotationEulerHint = (0, 2.7401667, 0)
         }
-        prepend references = @Models/shop-v2.usdz@
+        references = @Models/shop-v2.usdz@
     )
     {
         quatf xformOp:orient = (0.19936796, 0, 0.9799247, 0)
         float3 xformOp:scale = (0.015, 0.015, 0.015)
         float3 xformOp:translate = (-0.52496123, -3.1292439e-7, 1.4423126)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def RealityKitComponent "ImageBasedLightReceiver"
+        {
+            rel iblEntity = </Root/IBL>
+            uniform token info:id = "RealityKit.ImageBasedLightReceiver"
+        }
     }
 }
 

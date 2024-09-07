@@ -78,7 +78,7 @@ struct HomeView: View {
                                 
                                 if vm.rotate {
                                     //Anadimos la rotacion
-                                    vm.rotateShoe(parentEntity!, rotate: vm.rotate)
+                                    vm.rotateUniqueShoe(parentEntity!, rotate: vm.rotate)
                                 }
                             } catch {
                                 print("Error al cargar las zapatillas: \(error)")
@@ -119,7 +119,7 @@ struct HomeView: View {
             }
             .onChange(of: vm.rotate) { _, _ in
                 //Anadimos la rotacion
-                vm.rotateShoe(parentEntity!, rotate: vm.rotate)
+                vm.rotateUniqueShoe(parentEntity!, rotate: vm.rotate)
             }
             .onAppear {
                 open(id: "ShoesScrollView")

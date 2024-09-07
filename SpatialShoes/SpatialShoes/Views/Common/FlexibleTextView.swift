@@ -11,7 +11,7 @@ struct FlexibleTextView: View {
     let data: [String]
     let spacing: CGFloat
     
-    @State private var totalHeight = CGFloat.infinity
+    @State private var totalHeight: CGFloat?
 
     var body: some View {
         GeometryReader { geometry in
@@ -57,7 +57,7 @@ struct FlexibleTextView: View {
         .background(viewHeightReader($totalHeight))
     }
 
-    private func viewHeightReader(_ binding: Binding<CGFloat>) -> some View {
+    private func viewHeightReader(_ binding: Binding<CGFloat?>) -> some View {
         GeometryReader { geometry -> Color in
             DispatchQueue.main.async {
                 binding.wrappedValue = geometry.size.height

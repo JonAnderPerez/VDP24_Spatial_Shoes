@@ -12,6 +12,7 @@
 		8B3D00A82C875B7100D7DD52 /* ShoesTest.json in Resources */ = {isa = PBXBuildFile; fileRef = 8B3D00A72C875B7100D7DD52 /* ShoesTest.json */; };
 		8B3D00AC2C87676100D7DD52 /* FlexibleTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3D00AB2C87676100D7DD52 /* FlexibleTextView.swift */; };
 		8B3D00AE2C876B5E00D7DD52 /* FlexibleColorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3D00AD2C876B5E00D7DD52 /* FlexibleColorView.swift */; };
+		8B4ED7242C8C51DD006A323A /* RotationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4ED7232C8C51DD006A323A /* RotationManager.swift */; };
 		8B9889432C7DF463002827DE /* FavInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9889422C7DF463002827DE /* FavInteractor.swift */; };
 		8BA7984F2C6F970A008437D4 /* SpatialShoesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA7984E2C6F970A008437D4 /* SpatialShoesApp.swift */; };
 		8BA798512C6F970A008437D4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA798502C6F970A008437D4 /* ContentView.swift */; };
@@ -41,6 +42,7 @@
 		8B3D00A72C875B7100D7DD52 /* ShoesTest.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ShoesTest.json; sourceTree = "<group>"; };
 		8B3D00AB2C87676100D7DD52 /* FlexibleTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlexibleTextView.swift; sourceTree = "<group>"; };
 		8B3D00AD2C876B5E00D7DD52 /* FlexibleColorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlexibleColorView.swift; sourceTree = "<group>"; };
+		8B4ED7232C8C51DD006A323A /* RotationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotationManager.swift; sourceTree = "<group>"; };
 		8B9889422C7DF463002827DE /* FavInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavInteractor.swift; sourceTree = "<group>"; };
 		8BA798472C6F970A008437D4 /* SpatialShoes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpatialShoes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BA7984E2C6F970A008437D4 /* SpatialShoesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpatialShoesApp.swift; sourceTree = "<group>"; };
@@ -86,6 +88,14 @@
 				8B3D00AD2C876B5E00D7DD52 /* FlexibleColorView.swift */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		8B4ED7222C8C51CF006A323A /* Rotation */ = {
+			isa = PBXGroup;
+			children = (
+				8B4ED7232C8C51DD006A323A /* RotationManager.swift */,
+			);
+			path = Rotation;
 			sourceTree = "<group>";
 		};
 		8BA7983E2C6F970A008437D4 = {
@@ -210,6 +220,7 @@
 		8BDCE4342C74BABA001F45F2 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				8B4ED7222C8C51CF006A323A /* Rotation */,
 				8BDCE4382C74BBC8001F45F2 /* Extension */,
 				8BDCE4352C74BAC0001F45F2 /* Gesture */,
 			);
@@ -316,6 +327,7 @@
 				8BA7986F2C6F9F9B008437D4 /* ShoesViewModel.swift in Sources */,
 				8BA798652C6F9A69008437D4 /* DataInteractor.swift in Sources */,
 				8BA798512C6F970A008437D4 /* ContentView.swift in Sources */,
+				8B4ED7242C8C51DD006A323A /* RotationManager.swift in Sources */,
 				8B3055582C764822001FAB8B /* ShoeCard.swift in Sources */,
 				8BA798772C6FA172008437D4 /* DetailView.swift in Sources */,
 				8BDCE4332C74AF05001F45F2 /* Detail3DView.swift in Sources */,

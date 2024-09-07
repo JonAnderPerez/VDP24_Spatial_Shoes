@@ -18,14 +18,14 @@ struct SpatialShoesApp: App {
                 .environment(shoesVM)
         }
         
-        // Scroll de items para la home
+        // Scroll de items
         WindowGroup(id: "ShoesScrollView") {
             ShoesScrollView()
                 .environment(shoesVM)
         }
         .windowStyle(.plain)
         .windowResizability(.contentSize)
-        //.defaultPosition(.bottom) //TODO: Para VisionOS 2.0
+        //TODO: Para VisionOS 2.0 placement en el Bottom
         
         // Pantalla volumetrica para el detalle de los zapatos
         WindowGroup(id: "ShoeDetail3D", for: Shoe.self) { $selectedShoe in
@@ -36,7 +36,7 @@ struct SpatialShoesApp: App {
         }
         .windowStyle(.volumetric)
         .defaultSize(width: 1, height: 1, depth: 1, in: .meters)
-        //.defaultPosition(.trailing) //TODO: Para VisionOS 2.0
+        //TODO: Para VisionOS 2.0 placement en el Trailling
         
         // Espacio immersivo para el showroom
         ImmersiveSpace(id: "ImmersiveShowRoom") {

@@ -85,13 +85,13 @@ struct DetailView: View {
                     
                     if vm.rotate {
                         //Anadimos la rotacion
-                        vm.rotateShoe(parentEntity!, rotate: vm.rotate)
+                        vm.rotateUniqueShoe(parentEntity!, rotate: vm.rotate)
                     }
                 } catch {
                     print("Error al cargar las zapatillas: \(error)")
                 }
             } update: { _ in
-                if let selectedShoe = vm.selectedShoe, let childEntity = parentEntity?.children.first {
+                if let childEntity = parentEntity?.children.first {
                     parentEntity?.removeChild(childEntity)
                     
                     Task {
@@ -128,7 +128,7 @@ struct DetailView: View {
         }
         .onChange(of: vm.rotate) { _, _ in
             //Anadimos la rotacion
-            vm.rotateShoe(parentEntity!, rotate: vm.rotate)
+            vm.rotateUniqueShoe(parentEntity!, rotate: vm.rotate)
         }
         .onChange(of: isFav) { _, _ in
             vm.toggleFavShoe(id: selectedShoe.id, isFav: isFav)
