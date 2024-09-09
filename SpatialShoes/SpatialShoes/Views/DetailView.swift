@@ -126,11 +126,11 @@ struct DetailView: View {
                 }
             }
         }
-        .onChange(of: vm.rotate) { _, _ in
+        .onChange(of: vm.rotate) {
             //Anadimos la rotacion
             vm.rotateUniqueShoe(parentEntity!, rotate: vm.rotate)
         }
-        .onChange(of: isFav) { _, _ in
+        .onChange(of: isFav) {
             vm.toggleFavShoe(id: selectedShoe.id, isFav: isFav)
         }
         .onDisappear {

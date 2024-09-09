@@ -117,7 +117,7 @@ struct HomeView: View {
                     Toggle("Rotación 3D", systemImage: "rotate.3d", isOn: $vmBindable.rotate)
                 }
             }
-            .onChange(of: vm.rotate) { _, _ in
+            .onChange(of: vm.rotate) {
                 //Anadimos la rotacion
                 vm.rotateUniqueShoe(parentEntity!, rotate: vm.rotate)
             }

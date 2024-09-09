@@ -20,7 +20,15 @@ struct GalleryView: View {
             ScrollView {
                 LazyVGrid(columns: gridItem) {
                     ForEach(vm.shoes, id: \.id) { shoe in
-                        ShoeCard(shoe: shoe, isNavigationCard: true, rotate: false, isFav: .init(get: { shoe.isFav }, set: { newVal in vm.toggleFavShoe(id: shoe.id, isFav: newVal) }))
+                        ShoeCard(
+                            shoe: shoe,
+                            isNavigationCard: true,
+                            rotate: false,
+                            isFav: .init(
+                                get: { shoe.isFav },
+                                set: { newVal in vm.toggleFavShoe(id: shoe.id, isFav: newVal) }
+                            )
+                        )
                     }
                 }
             }

@@ -59,7 +59,7 @@ struct ShoeCard: View {
                         //Modificamos la zapatilla
                         vm.modifySmallShoeScaleAndPosition(shoeEntity)
                     } catch {
-                        print("Error al cargar las zapatillas: \(error)")
+                        print("Error al cargar las zapatillas en el card \(shoe.model3DName): \(error)")
                     }
                 } update: { content in
                     if let parentEntity = content.entities.first {

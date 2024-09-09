@@ -72,7 +72,7 @@ public struct GestureComponent: Component, Codable {
     public var canRotate: Bool = true
     
     // Un valor boolean que indica si el modelo volvera a su transformada original al soltar el modelo
-    public var resetOnEnded: Bool = false //TODO: Animar la vuelta al modelo original
+    public var resetOnEnded: Bool = false
     
     // MARK: - Lógica de Arrastre (Drag)
     

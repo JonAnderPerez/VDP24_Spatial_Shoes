@@ -44,9 +44,9 @@ struct SpatialShoesApp: App {
                 .environment(shoesVM)
         }
         .immersiveContentBrightness(.bright)
-        .immersionStyle(selection: .constant(.progressive), in: .progressive)
+        .immersionStyle(selection: .constant(.full), in: .full)
         
-        // Espacio immersivo de una tienda de ropa
+        // Espacio immersivo de una tienda de ropa TODO: para VisionOS 2.0
         ImmersiveSpace(id: "Store") {
             StoreView(domeEntity: .constant(nil))
         }

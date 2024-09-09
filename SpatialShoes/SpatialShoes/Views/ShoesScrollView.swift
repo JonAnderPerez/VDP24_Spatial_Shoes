@@ -12,9 +12,20 @@ struct ShoesScrollView: View {
     
     var body: some View {
         ScrollView(.horizontal) {
+            // Info: al cargar la lista con LazyHStack puede lanzar un error al cargar el modelo de RealityView,
+            // este error lo lanza aparentemente por que intenta cargar dos veces el mismo modelo...
+            // Y el modelo acaba cargando sin probelma, pero con HStack, en el espacio immersivo relentiza mucho la carga.
             LazyHStack {
                 ForEach(vm.shoes.filter({ $0.id != vm.selectedShoe?.id })) { shoe in
-                    ShoeCard(shoe: shoe, isNavigationCard: false, rotate: false, isFav: .init(get: { shoe.isFav }, set: { newVal in vm.toggleFavShoe(id: shoe.id, isFav: newVal) }))
+                    ShoeCard(
+                        shoe: shoe,
+                        isNavigationCard: false,
+                        rotate: false,
+                        isFav: .init(
+                            get: { shoe.isFav },
+                            set: { newVal in vm.toggleFavShoe(id: shoe.id, isFav: newVal) }
+                        )
+                    )
                 }
             }
         }
