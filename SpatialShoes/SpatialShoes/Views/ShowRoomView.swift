@@ -17,8 +17,9 @@ struct ShowRoomView: View {
     @Environment(\.dismissImmersiveSpace) private var dismissSpace
     
     var body: some View {
+        @Bindable var vmBindable = vm
         ZStack {
-            StoreView() // Para poder usar el espacio immersivo en Vision 1.2
+            StoreView(domeEntity: $vmBindable.domeEntity) // Para poder usar el espacio immersivo en Vision 1.2
             
             RealityView { content, attachments in
                 do {
@@ -27,6 +28,10 @@ struct ShowRoomView: View {
                     if let selectedShoe = vm.selectedShoe {
                         let shoeEntity = try await Entity(named: selectedShoe.model3DName, in: shoesBundle)
                         shoeEntity.name = "ShoeChild"
+                        
+                        if let domeEntity = vm.domeEntity {
+                            shoeEntity.components.set(ImageBasedLightReceiverComponent(imageBasedLight: domeEntity))
+                        }
                         
                         let parentEntity = Entity()
                         parentEntity.name = "ParentEntity"
@@ -60,6 +65,10 @@ struct ShowRoomView: View {
                         do {
                             let shoeEntity = try await Entity(named: selectedShoe.model3DName, in: shoesBundle)
                             shoeEntity.name = "ShoeChild"
+                            
+                            if let domeEntity = vm.domeEntity {
+                                shoeEntity.components.set(ImageBasedLightReceiverComponent(imageBasedLight: domeEntity))
+                            }
                             
                             parentEntity.addChild(shoeEntity)
                             
@@ -105,66 +114,3 @@ struct ShowRoomView: View {
          */
     }
 }
-
-/*
- RealityView { content, attachments in
-     do {
-         if let selectedShoe = vm.selectedShoe {
-             let shoeEntity = try await Entity(named: selectedShoe.model3DName, in: shoesBundle)
-             shoeEntity.name = "ShoeChild"
-             
-             let parentEntity = Entity()
-             parentEntity.name = "ParentEntity"
-             parentEntity.addChild(shoeEntity)
-             
-             //Anadimos la zapatilla a la escena
-             parentEntity.setParent(handAnchor)
-             parentEntity.position = [0, -0.15, -0.6]
-             
-             //Modificamos la zapatilla
-             vm.modifyImmersiveShoeScaleAndPosition(shoeEntity)
-             
-             if let dismissButton = attachments.entity(for: "dismissButton") {
-                 parentEntity.addChild(dismissButton)
-                 dismissButton.position = [0, -0.15, 0];
-             }
-         }
-         
-         content.add(handAnchor)
-     } catch {
-         print("Error al cargar las zapatillas: \(error)")
-     }
- } update: { content, _ in
-     if let selectedShoe = vm.selectedShoe,
-         let anchor = content.entities.first,
-         let parentEntity = anchor.findEntity(named: "ParentEntity"),
-         let childEntity = parentEntity.findEntity(named: "ShoeChild") {
-         parentEntity.removeChild(childEntity)
-         
-         Task {
-             do {
-                 let shoeEntity = try await Entity(named: selectedShoe.model3DName, in: shoesBundle)
-                 shoeEntity.name = "ShoeChild"
-                 
-                 parentEntity.addChild(shoeEntity)
-                 
-                 //Modificamos la zapatilla
-                 vm.modifyImmersiveShoeScaleAndPosition(shoeEntity)
-             } catch {
-                 print("Error al cargar las zapatillas: \(error)")
-             }
-         }
-     }
- } attachments: {
-     Attachment(id: "dismissButton") {
-         Button("Cerrar carrusel immersivo", systemImage: "xmark") {
-             Task {
-                 dismiss(id: "ShoesScrollView")
-                 await dismissSpace()
-             }
-         }
-         .buttonBorderShape(.circle)
-         .labelStyle(.iconOnly)
-     }
- }.installGestures()
-*/

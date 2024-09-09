@@ -46,6 +46,10 @@ struct ShoeCard: View {
                     do {
                         let shoeEntity = try await Entity(named: shoe.model3DName, in: shoesBundle)
                         
+                        if let domeEntity = vm.domeEntity {
+                            shoeEntity.components.set(ImageBasedLightReceiverComponent(imageBasedLight: domeEntity))
+                        }
+                        
                         let parentEntity = Entity()
                         parentEntity.addChild(shoeEntity)
                         
@@ -62,6 +66,10 @@ struct ShoeCard: View {
                         if rotate {
                             //Anadimos la rotacion
                             vm.rotateShoe(parentEntity)
+                        }
+                        
+                        if let domeEntity = vm.domeEntity, let shoeEntity = parentEntity.children.first {
+                            shoeEntity.components.set(ImageBasedLightReceiverComponent(imageBasedLight: domeEntity))
                         }
                     }
                 }
@@ -85,9 +93,6 @@ struct ShoeCard: View {
             }
         }
         .frame(width: 300)
-        .onChange(of: isFav) { _, _ in
-            vm.toggleFavShoe(id: shoe.id, isFav: isFav)
-        }
     }
 }
 

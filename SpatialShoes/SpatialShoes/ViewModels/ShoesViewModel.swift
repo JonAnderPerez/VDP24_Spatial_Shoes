@@ -12,9 +12,11 @@ import Combine
 @Observable
 final class ShoesViewModel {
 
+    // General
     let interactor: DataInteractor
     let rotationManager: RotationManager
     
+    // Shoes
     var selectedShoe: Shoe?
     
     private var favShoesIndex: [FavShoe]
@@ -28,12 +30,16 @@ final class ShoesViewModel {
         }
     }
     
+    // Dome
+    var domeEntity: Entity?
+    
+    // Rotation
     var rotate = false
-    
-    @ObservationIgnored var errorMsg = "" //TODO: Esto esta sin implementar
-    var showAlert = false
-    
     @ObservationIgnored private var rotationTimers: [Cancellable] = []
+    
+    // Alert
+    @ObservationIgnored var errorMsg = ""
+    var showAlert = false
     
     init(interactor: DataInteractor = Interactor()) {
         GestureComponent.registerComponent()
@@ -80,6 +86,10 @@ final class ShoesViewModel {
             addShoeToFav(id: id)
         }
         fetchFavShoes()
+        
+        if selectedShoe?.id == id {
+            selectedShoe = shoes.first(where: { $0.id == id })
+        }
     }
     
     @MainActor func addShoeToFav(id: Int) {
@@ -163,6 +173,7 @@ final class ShoesViewModel {
         shoeEntity.components.set(gestureComponent)
     }
 
+    // 3D Model Rotation
     func rotateShoe(_ shoeEntity: Entity, rotate: Bool = true) {
         if rotate {
             rotationManager.startRotation()

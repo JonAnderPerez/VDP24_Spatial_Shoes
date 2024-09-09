@@ -48,9 +48,8 @@ struct SpatialShoesApp: App {
         
         // Espacio immersivo de una tienda de ropa
         ImmersiveSpace(id: "Store") {
-            StoreView()
+            StoreView(domeEntity: .constant(nil))
         }
-        .immersiveContentBrightness(.bright)
         .immersionStyle(selection: .constant(.progressive), in: .progressive)
     }
 }

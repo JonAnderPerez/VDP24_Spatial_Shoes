@@ -14,6 +14,7 @@
 		8B3D00AE2C876B5E00D7DD52 /* FlexibleColorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3D00AD2C876B5E00D7DD52 /* FlexibleColorView.swift */; };
 		8B4ED7242C8C51DD006A323A /* RotationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4ED7232C8C51DD006A323A /* RotationManager.swift */; };
 		8B9889432C7DF463002827DE /* FavInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9889422C7DF463002827DE /* FavInteractor.swift */; };
+		8B9DE2972C8F21C200E58FC1 /* Light.skybox in Resources */ = {isa = PBXBuildFile; fileRef = 8B9DE2952C8F214900E58FC1 /* Light.skybox */; };
 		8BA7984F2C6F970A008437D4 /* SpatialShoesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA7984E2C6F970A008437D4 /* SpatialShoesApp.swift */; };
 		8BA798512C6F970A008437D4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA798502C6F970A008437D4 /* ContentView.swift */; };
 		8BA798532C6F970B008437D4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8BA798522C6F970B008437D4 /* Assets.xcassets */; };
@@ -44,6 +45,7 @@
 		8B3D00AD2C876B5E00D7DD52 /* FlexibleColorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlexibleColorView.swift; sourceTree = "<group>"; };
 		8B4ED7232C8C51DD006A323A /* RotationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotationManager.swift; sourceTree = "<group>"; };
 		8B9889422C7DF463002827DE /* FavInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavInteractor.swift; sourceTree = "<group>"; };
+		8B9DE2952C8F214900E58FC1 /* Light.skybox */ = {isa = PBXFileReference; lastKnownFileType = file.skybox; path = Light.skybox; sourceTree = "<group>"; };
 		8BA798472C6F970A008437D4 /* SpatialShoes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpatialShoes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BA7984E2C6F970A008437D4 /* SpatialShoesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpatialShoesApp.swift; sourceTree = "<group>"; };
 		8BA798502C6F970A008437D4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 		8BA798602C6F9A19008437D4 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				8B9DE2952C8F214900E58FC1 /* Light.skybox */,
 				8BA798612C6F9A2E008437D4 /* Shoes.json */,
 			);
 			path = Resources;
@@ -308,6 +311,7 @@
 				8BA798562C6F970B008437D4 /* Preview Assets.xcassets in Resources */,
 				8BA798622C6F9A2E008437D4 /* Shoes.json in Resources */,
 				8BA798532C6F970B008437D4 /* Assets.xcassets in Resources */,
+				8B9DE2972C8F21C200E58FC1 /* Light.skybox in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -23,12 +23,6 @@ def Xform "Root"
         float3 xformOp:scale = (0.015, 0.015, 0.015)
         float3 xformOp:translate = (-0.52496123, -3.1292439e-7, 1.4423126)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
-
-        def RealityKitComponent "ImageBasedLightReceiver"
-        {
-            rel iblEntity = </Root/IBL>
-            uniform token info:id = "RealityKit.ImageBasedLightReceiver"
-        }
     }
 }
 
