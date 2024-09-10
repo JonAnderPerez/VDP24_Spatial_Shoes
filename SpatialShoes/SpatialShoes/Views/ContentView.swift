@@ -29,7 +29,8 @@ struct ContentView: View {
                     Label("Favoritos", systemImage: "star.fill")
                 }
         }
-        .alert("Spatial Shoes Error", isPresented: $vmBindable.showAlert, actions: {}) {
+        .frame(width: 1280 , height: 720) // Tamaño fijo para las pantallas
+        .alert("Error Spatial Shoes", isPresented: $vmBindable.showAlert, actions: {}) {
             Text(vmBindable.errorMsg)
         }
     }

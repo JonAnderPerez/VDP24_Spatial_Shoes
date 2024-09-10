@@ -17,6 +17,7 @@ struct SpatialShoesApp: App {
             ContentView()
                 .environment(shoesVM)
         }
+        .windowResizability(.contentSize)
         
         // Scroll de items
         WindowGroup(id: "ShoesScrollView") {
@@ -36,7 +37,7 @@ struct SpatialShoesApp: App {
         }
         .windowStyle(.volumetric)
         .defaultSize(width: 1, height: 1, depth: 1, in: .meters)
-        //TODO: Para VisionOS 2.0 placement en el Trailling
+        //TODO: Para VisionOS 2.0 placement en el Leading/Trailling
         
         // Espacio immersivo para el showroom
         ImmersiveSpace(id: "ImmersiveShowRoom") {

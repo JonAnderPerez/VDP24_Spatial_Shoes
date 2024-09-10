@@ -17,7 +17,6 @@ struct DetailView: View {
     
     @State var selectedShoe: Shoe
     
-    @State private var parentEntity: Entity?
     @State private var isFav: Bool
     
     init(selectedShoe: Shoe) {
@@ -28,89 +27,11 @@ struct DetailView: View {
     var body: some View {
         @Bindable var vmBindable = vm
         HStack {
-            VStack(alignment: .leading, spacing: 16) {
-                HStack {
-                    Text(selectedShoe.name)
-                        .font(.extraLargeTitle)
-                    
-                    Toggle("Favorito", systemImage: "star", isOn: $isFav)
-                        .toggleStyle(.button)
-                        .buttonBorderShape(.circle)
-                        .labelStyle(.iconOnly)
-                        .padding()
-                }
-                
-                Text("\(selectedShoe.price.formatted(.number))€")
-                    .font(.largeTitle)
-                    .foregroundStyle(.black)
-                    .padding(.vertical, 8)
-                    .padding(.horizontal, 16)
-                    .background(RoundedRectangle(cornerRadius: 24).foregroundStyle(Color(.yellow)))
-                
-                ScrollView {
-                    VStack(alignment: .leading, spacing: 16) {
-                        Text(LocalizedStringKey(selectedShoe.description))
-                            .font(.title2)
-                            .foregroundStyle(.secondary)
-                        
-                        detailItem(type: "Marca:", value: selectedShoe.brand)
-                        detailItem(type: "Tipo:", value: selectedShoe.type)
-                        detailItem(type: "Genero:", value: selectedShoe.gender)
-                        detailItem(type: "Peso:", value: "\(selectedShoe.weight) Kg")
-                        detailItem(type: "Garantia:", value: "\(selectedShoe.warranty) Años")
-                        detailItem(type: "Origen:", value: selectedShoe.origin)
-                        detailItemColor(type: "Colores:", values: selectedShoe.colors)
-                        detailItemList(type: "Tallas:", values: selectedShoe.size.map { "\($0)" })
-                        detailItemList(type: "Materiales:", values: selectedShoe.materials)
-                        detailItemList(type: "Certificaciónes:", values: selectedShoe.certifications)
-                    }
-                }
-                .scrollIndicators(.visible)
-            }
+            shoeDetailScroll()
 
             Spacer()
             
-            RealityView { content in
-                do {
-                    let shoeEntity = try await Entity(named: selectedShoe.model3DName, in: shoesBundle)
-                    
-                    parentEntity = Entity()
-                    parentEntity!.addChild(shoeEntity)
-                    
-                    //Anadimos la zapatilla a la escena
-                    content.add(parentEntity!)
-                    
-                    //Modificamos la zapatilla
-                    vm.modifyBigShoeScaleAndPosition(shoeEntity)
-                    
-                    if vm.rotate {
-                        //Anadimos la rotacion
-                        vm.rotateUniqueShoe(parentEntity!, rotate: vm.rotate)
-                    }
-                } catch {
-                    print("Error al cargar las zapatillas: \(error)")
-                }
-            } update: { _ in
-                if let childEntity = parentEntity?.children.first {
-                    parentEntity?.removeChild(childEntity)
-                    
-                    Task {
-                        do {
-                            let shoeEntity = try await Entity(named: selectedShoe.model3DName, in: shoesBundle)
-                            
-                            parentEntity!.addChild(shoeEntity)
-                            
-                            //Modificamos la zapatilla
-                            vm.modifyBigShoeScaleAndPosition(shoeEntity)
-                        } catch {
-                            print("Error al cargar las zapatillas: \(error)")
-                        }
-                    }
-                }
-            }
-            .padding()
-            .frame(width: 400, height: 400)
-            .frame(depth: 400, alignment: .back)
+            ShoeBigModel(selectedShoe: selectedShoe)
         }
         .padding(32)
         .navigationTitle("Spatial Shoes")
@@ -126,10 +47,6 @@ struct DetailView: View {
                 }
             }
         }
-        .onChange(of: vm.rotate) {
-            //Anadimos la rotacion
-            vm.rotateUniqueShoe(parentEntity!, rotate: vm.rotate)
-        }
         .onChange(of: isFav) {
             vm.toggleFavShoe(id: selectedShoe.id, isFav: isFav)
         }
@@ -139,7 +56,53 @@ struct DetailView: View {
         }
     }
     
-    func detailItem(type: String, value: String) -> some View {
+    private func shoeDetailScroll() -> some View {
+        VStack(alignment: .leading, spacing: 16) {
+            HStack {
+                // Nombre zapatilla
+                Text(selectedShoe.name)
+                    .font(.extraLargeTitle)
+                
+                // Boton de favorito
+                Toggle("Favorito", systemImage: "star", isOn: $isFav)
+                    .toggleStyle(.button)
+                    .buttonBorderShape(.circle)
+                    .labelStyle(.iconOnly)
+                    .padding()
+            }
+            
+            // Precio
+            Text("\(selectedShoe.price.formatted(.number))€")
+                .font(.largeTitle)
+                .foregroundStyle(.black)
+                .padding(.vertical, 8)
+                .padding(.horizontal, 16)
+                .background(RoundedRectangle(cornerRadius: 24).foregroundStyle(Color(.yellow)))
+            
+            // Detalles
+            ScrollView {
+                VStack(alignment: .leading, spacing: 16) {
+                    Text(LocalizedStringKey(selectedShoe.description))
+                        .font(.title2)
+                        .foregroundStyle(.secondary)
+                    
+                    detailItem(type: "Marca:", value: selectedShoe.brand)
+                    detailItem(type: "Tipo:", value: selectedShoe.type)
+                    detailItem(type: "Genero:", value: selectedShoe.gender)
+                    detailItem(type: "Peso:", value: "\(selectedShoe.weight) Kg")
+                    detailItem(type: "Garantia:", value: "\(selectedShoe.warranty) Años")
+                    detailItem(type: "Origen:", value: selectedShoe.origin)
+                    detailItemColor(type: "Colores:", values: selectedShoe.colors)
+                    detailItemList(type: "Tallas:", values: selectedShoe.size.map { "\($0)" })
+                    detailItemList(type: "Materiales:", values: selectedShoe.materials)
+                    detailItemList(type: "Certificaciónes:", values: selectedShoe.certifications)
+                }
+            }
+            .scrollIndicators(.visible)
+        }
+    }
+    
+    private func detailItem(type: String, value: String) -> some View {
         HStack {
             Text(type)
                 .font(.title)
@@ -151,7 +114,7 @@ struct DetailView: View {
         }
     }
     
-    func detailItemList(type: String, values: [String]) -> some View {
+    private func detailItemList(type: String, values: [String]) -> some View {
         HStack(alignment: .top) {
             Text(type)
                 .font(.title)
@@ -162,7 +125,7 @@ struct DetailView: View {
         }
     }
     
-    func detailItemColor(type: String, values: [ShoeColor]) -> some View {
+    private func detailItemColor(type: String, values: [ShoeColor]) -> some View {
         HStack {
             Text(type)
                 .font(.title)

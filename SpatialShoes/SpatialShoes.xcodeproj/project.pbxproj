@@ -15,6 +15,7 @@
 		8B4ED7242C8C51DD006A323A /* RotationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4ED7232C8C51DD006A323A /* RotationManager.swift */; };
 		8B9889432C7DF463002827DE /* FavInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9889422C7DF463002827DE /* FavInteractor.swift */; };
 		8B9DE2972C8F21C200E58FC1 /* Light.skybox in Resources */ = {isa = PBXBuildFile; fileRef = 8B9DE2952C8F214900E58FC1 /* Light.skybox */; };
+		8B9DE2992C8F4D2C00E58FC1 /* ShoeBigModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9DE2982C8F4D2B00E58FC1 /* ShoeBigModel.swift */; };
 		8BA7984F2C6F970A008437D4 /* SpatialShoesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA7984E2C6F970A008437D4 /* SpatialShoesApp.swift */; };
 		8BA798512C6F970A008437D4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA798502C6F970A008437D4 /* ContentView.swift */; };
 		8BA798532C6F970B008437D4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8BA798522C6F970B008437D4 /* Assets.xcassets */; };
@@ -46,6 +47,7 @@
 		8B4ED7232C8C51DD006A323A /* RotationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotationManager.swift; sourceTree = "<group>"; };
 		8B9889422C7DF463002827DE /* FavInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavInteractor.swift; sourceTree = "<group>"; };
 		8B9DE2952C8F214900E58FC1 /* Light.skybox */ = {isa = PBXFileReference; lastKnownFileType = file.skybox; path = Light.skybox; sourceTree = "<group>"; };
+		8B9DE2982C8F4D2B00E58FC1 /* ShoeBigModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoeBigModel.swift; sourceTree = "<group>"; };
 		8BA798472C6F970A008437D4 /* SpatialShoes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpatialShoes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BA7984E2C6F970A008437D4 /* SpatialShoesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpatialShoesApp.swift; sourceTree = "<group>"; };
 		8BA798502C6F970A008437D4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 			isa = PBXGroup;
 			children = (
 				8B3055572C764822001FAB8B /* ShoeCard.swift */,
+				8B9DE2982C8F4D2B00E58FC1 /* ShoeBigModel.swift */,
 				8B3D00AB2C87676100D7DD52 /* FlexibleTextView.swift */,
 				8B3D00AD2C876B5E00D7DD52 /* FlexibleColorView.swift */,
 			);
@@ -328,6 +331,7 @@
 				8BA7986C2C6F9CB0008437D4 /* DataTest.swift in Sources */,
 				8B30555A2C7659AE001FAB8B /* ShoesScrollView.swift in Sources */,
 				8BDCE4372C74BAD1001F45F2 /* GestureComponent.swift in Sources */,
+				8B9DE2992C8F4D2C00E58FC1 /* ShoeBigModel.swift in Sources */,
 				8BA7986F2C6F9F9B008437D4 /* ShoesViewModel.swift in Sources */,
 				8BA798652C6F9A69008437D4 /* DataInteractor.swift in Sources */,
 				8BA798512C6F970A008437D4 /* ContentView.swift in Sources */,

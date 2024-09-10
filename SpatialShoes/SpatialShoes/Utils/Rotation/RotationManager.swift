@@ -22,6 +22,7 @@ class RotationManager {
     
     private var rotationTimers: [AnyCancellable] = []
     private var entities: [Entity] = []
+    private var uniqueEntities: [Entity] = []
 
     init() {
         self.degreesPerSecond = 360.0 / rotationInterval
@@ -93,32 +94,37 @@ class RotationManager {
         
         if !rotate {
             stopRotation()
+            uniqueEntities.removeAll()
             return
         }
-
-        var currentRotation: Float = 0.0
         
-        // Almacenar la rotación inicial
-        let initialRotation = shoeEntity.transform.rotation
+        if !uniqueEntities.contains(where: { $0 == shoeEntity }) {
+            uniqueEntities.append(shoeEntity)
+            
+            var currentRotation: Float = 0.0
+            
+            // Almacenar la rotación inicial
+            let initialRotation = shoeEntity.transform.rotation
 
-        let timer = Timer.publish(every: timerInterval, on: .main, in: .common)
-            .autoconnect()
-            .sink { _ in
-                currentRotation += self.degreesPerTick
+            let timer = Timer.publish(every: timerInterval, on: .main, in: .common)
+                .autoconnect()
+                .sink { _ in
+                    currentRotation += self.degreesPerTick
 
-                // Reiniciar el ángulo si supera los 360 grados
-                if currentRotation >= 360 {
-                    currentRotation -= 360
+                    // Reiniciar el ángulo si supera los 360 grados
+                    if currentRotation >= 360 {
+                        currentRotation -= 360
+                    }
+
+                    // Crear la rotación incremental alrededor del eje Y
+                    let incrementalRotation = simd_quatf(angle: currentRotation * .pi / 180, axis: [0, 1, 0])
+
+                    // Aplicar la rotación incremental sobre la rotación inicial
+                    shoeEntity.transform.rotation = initialRotation * incrementalRotation
                 }
-
-                // Crear la rotación incremental alrededor del eje Y
-                let incrementalRotation = simd_quatf(angle: currentRotation * .pi / 180, axis: [0, 1, 0])
-
-                // Aplicar la rotación incremental sobre la rotación inicial
-                shoeEntity.transform.rotation = initialRotation * incrementalRotation
-            }
-        
-        rotationTimers.append(timer)
+            
+            rotationTimers.append(timer)
+        }
     }
 }
 

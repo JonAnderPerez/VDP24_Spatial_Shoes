@@ -38,6 +38,9 @@ struct FavView: View {
             .navigationDestination(for: Shoe.self) { shoe in
                  DetailView(selectedShoe: shoe)
             }
+            .onAppear {
+                vm.startRotation()
+            }
         }
     }
 }

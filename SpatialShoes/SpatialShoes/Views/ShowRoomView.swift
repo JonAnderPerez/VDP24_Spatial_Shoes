@@ -19,7 +19,7 @@ struct ShowRoomView: View {
     var body: some View {
         @Bindable var vmBindable = vm
         ZStack {
-            StoreView(domeEntity: $vmBindable.domeEntity) // Para poder usar el espacio immersivo en Vision 1.2
+            StoreView(domeEntity: $vmBindable.domeEntity) // Modelo de la tienda para poder usar el espacio immersivo en Vision 1.2
             
             RealityView { content, attachments in
                 do {
@@ -101,7 +101,7 @@ struct ShowRoomView: View {
             open(id: "MainContent")
         }
         
-        /* Para Vision 2.0
+        /* TODO: Para Vision 2.0
          .immersiveEnvironmentPicker {
              Button {
                  Task {

@@ -16,12 +16,14 @@ final class ShoesViewModel {
     let interactor: DataInteractor
     let rotationManager: RotationManager
     
-    // Shoes
+    // Zapatillas
     var selectedShoe: Shoe?
     
     private var favShoesIndex: [FavShoe]
     
     private let privShoes: [Shoe]
+    
+    // Zapatillas marcadas como favoritas
     var shoes: [Shoe] {
         privShoes.map { shoe in
             var newShoe = shoe
@@ -30,19 +32,19 @@ final class ShoesViewModel {
         }
     }
     
-    // Dome
+    // Dome - Entidad desde la que se añade la luz mediante IBL a las zapatillas en las escena
     var domeEntity: Entity?
     
-    // Rotation
+    // Rotacion
     var rotate = false
     @ObservationIgnored private var rotationTimers: [Cancellable] = []
     
-    // Alert
+    // Alerta
     @ObservationIgnored var errorMsg = ""
     var showAlert = false
     
     init(interactor: DataInteractor = Interactor()) {
-        GestureComponent.registerComponent()
+        GestureComponent.registerComponent() // Registro del componente para la gestion de gestos en la zapatilla
         
         self.rotationManager = RotationManager()
         
@@ -53,32 +55,33 @@ final class ShoesViewModel {
             self.selectedShoe = shoes.randomElement()
         } catch {
             self.privShoes = []
+            
             print("Error en la carga del JSON de zapatillas: \(error)")
             errorMsg = "Error en la carga del JSON de zapatillas: \(error)"
             showAlert.toggle()
         }
         
         Task {
+            // Cargamos las zapatillas favoritas al inicio
             await fetchFavShoes()
         }
     }
 
-    // Shoe functions
-    
+    // Shoe funciones
     func getColor(_ shoeColor: ShoeColor) -> Color {
         switch shoeColor {
-        case .black:
-            return .black
-        case .brown:
-            return .brown
-        case .red:
-            return .red
-        case .white:
-            return .white
+            case .black:
+                return .black
+            case .brown:
+                return .brown
+            case .red:
+                return .red
+            case .white:
+                return .white
         }
     }
     
-    // Fav functions
+    // Fav funciones
     @MainActor func toggleFavShoe(id: Int, isFav: Bool) {
         if !isFav {
             removeShoeFromFav(id: id)
@@ -119,8 +122,11 @@ final class ShoesViewModel {
         do {
             self.favShoesIndex = try FavShoeInteractor.shared.fetchFav()
         } catch {
-            print("Error al recuperar las zapatillas en favoritos: \(error)")
             self.favShoesIndex = []
+            
+            print("Error al recuperar las zapatillas en favoritos: \(error)")
+            errorMsg = "Error al recuperar las zapatillas en favoritos: \(error)"
+            showAlert.toggle()
         }
     }
     
@@ -156,6 +162,7 @@ final class ShoesViewModel {
                                                                     .offsetBy(translation: [0, 0, 15])]))
         shoeEntity.components.set(InputTargetComponent())
         
+        // Aniadidos los gestos al modelo
         let gestureComponent = GestureComponent()
         shoeEntity.components.set(gestureComponent)
     }
@@ -169,11 +176,16 @@ final class ShoesViewModel {
                                                                     .offsetBy(translation: [0, 0, 15])]))
         shoeEntity.components.set(InputTargetComponent())
         
+        // Aniadidos los gestos al modelo
         let gestureComponent = GestureComponent(resetOnEnded: true)
         shoeEntity.components.set(gestureComponent)
     }
 
-    // 3D Model Rotation
+    // Rotacion Modelo 3D
+    func startRotation() {
+        rotationManager.startRotation()
+    }
+    
     func rotateShoe(_ shoeEntity: Entity, rotate: Bool = true) {
         if rotate {
             rotationManager.startRotation()

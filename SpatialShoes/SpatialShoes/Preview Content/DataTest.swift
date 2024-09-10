@@ -67,6 +67,13 @@ extension ShoeCard {
     }
 }
 
+extension ShoeBigModel {
+    static var preview: some View {
+        ShoeBigModel(selectedShoe: .test)
+            .environment(ShoesViewModel(interactor: DataTest()))
+    }
+}
+
 extension Shoe {
     static let test = Shoe(
         id: 10901,
