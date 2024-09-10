@@ -11,7 +11,7 @@ import Shoes
 
 struct StoreView: View {
     
-    @Binding var domeEntity: Entity?
+    @Binding var domeEntity: Entity? // Binding para poder cargar la misma entidad con el IBL en todos los modelos de zapatillas necesarios
     
     var body: some View {
         RealityView { content in

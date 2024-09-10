@@ -101,7 +101,7 @@ struct ShowRoomView: View {
             open(id: "MainContent")
         }
         
-        /* TODO: Para Vision 2.0
+        /* TODO: Para VisionOS 2.0
          .immersiveEnvironmentPicker {
              Button {
                  Task {

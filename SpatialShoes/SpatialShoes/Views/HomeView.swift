@@ -39,7 +39,7 @@ struct HomeView: View {
                 }
             }
             .onAppear {
-                //open(id: "ShoesScrollView")
+                open(id: "ShoesScrollView")
             }
             .onDisappear {
                 dismiss(id: "ShoesScrollView")

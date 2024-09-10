@@ -8,6 +8,7 @@
 import SwiftUI
 import SwiftData
 
+// Enum para poder recuperar el color en el VM
 enum ShoeColor: String, Codable, CaseIterable {
     case black = "Negro"
     case brown = "Marrón"
@@ -39,6 +40,7 @@ struct Shoe: Codable, Identifiable, Hashable {
     }
 }
 
+// Modelo para guardar los favoritos en BD
 @Model
 class FavShoe {
     @Attribute(.unique) let id: Int
