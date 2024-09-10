@@ -2,7 +2,7 @@
 //  FavShoeInteractor.swift
 //  SpatialShoes
 //
-//  Created by Deusto SEIDOR on 27/8/24.
+//  Created by Jon Ander Perez on 27/8/24.
 //
 
 import Foundation

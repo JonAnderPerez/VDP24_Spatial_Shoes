@@ -2,7 +2,7 @@
 //  Detail3DView.swift
 //  SpatialShoes
 //
-//  Created by Deusto SEIDOR on 20/8/24.
+//  Created by Jon Ander Perez on 20/8/24.
 //
 
 import SwiftUI

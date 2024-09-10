@@ -2,7 +2,7 @@
 //  ShoeBigModel.swift
 //  SpatialShoes
 //
-//  Created by Deusto SEIDOR on 9/9/24.
+//  Created by Jon Ander Perez on 9/9/24.
 //
 
 import SwiftUI

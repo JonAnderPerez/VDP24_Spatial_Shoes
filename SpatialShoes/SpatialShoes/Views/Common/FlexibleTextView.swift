@@ -2,7 +2,7 @@
 //  FlexibleView.swift
 //  SpatialShoes
 //
-//  Created by Deusto SEIDOR on 3/9/24.
+//  Created by Jon Ander Perez on 3/9/24.
 //
 
 import SwiftUI

@@ -2,7 +2,7 @@
 //  ShoesScrollView.swift
 //  SpatialShoes
 //
-//  Created by Deusto SEIDOR on 21/8/24.
+//  Created by Jon Ander Perez on 21/8/24.
 //
 
 import SwiftUI

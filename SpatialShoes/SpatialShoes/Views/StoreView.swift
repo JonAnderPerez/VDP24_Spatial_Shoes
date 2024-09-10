@@ -2,7 +2,7 @@
 //  StoreView.swift
 //  SpatialShoes
 //
-//  Created by Deusto SEIDOR on 28/8/24.
+//  Created by Jon Ander Perez on 28/8/24.
 //
 
 import SwiftUI

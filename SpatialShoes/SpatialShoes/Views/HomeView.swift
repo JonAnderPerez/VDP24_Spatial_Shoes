@@ -2,7 +2,7 @@
 //  HomeView.swift
 //  SpatialShoes
 //
-//  Created by Deusto SEIDOR on 16/8/24.
+//  Created by Jon Ander Perez on 16/8/24.
 //
 
 import SwiftUI
