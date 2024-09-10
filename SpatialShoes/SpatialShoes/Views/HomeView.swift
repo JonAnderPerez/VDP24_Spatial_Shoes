@@ -25,7 +25,7 @@ struct HomeView: View {
                     Spacer()
                     
                     // Modelo 3D en grande
-                    ShoeBigModel(selectedShoe: selectedShoe)
+                    ShoeBigModel(selectedShoe: selectedShoe, isHomeView: true)
                 }
             }
             .padding(32)

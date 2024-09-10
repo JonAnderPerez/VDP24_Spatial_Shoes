@@ -15,12 +15,17 @@ struct ShoeBigModel: View {
     @State var selectedShoe: Shoe
     
     @State private var parentEntity: Entity?
+    @State private var modelName = ""
+    
+    var isHomeView = false
+    
     
     var body: some View {
         RealityView { content in
             do {
                 let shoeEntity = try await Entity(named: selectedShoe.model3DName, in: shoesBundle)
                 shoeEntity.name = selectedShoe.model3DName
+                modelName = selectedShoe.model3DName
                 
                 parentEntity = Entity()
                 parentEntity!.addChild(shoeEntity)
@@ -41,13 +46,19 @@ struct ShoeBigModel: View {
                 //Anadimos la rotacion
                 vm.rotateUniqueShoe(parentEntity, rotate: vm.rotate)
                 
-                if let childEntity = parentEntity.children.first,
+                var selectedShoe = self.selectedShoe
+                if isHomeView, vm.selectedShoe != nil {
+                    selectedShoe = vm.selectedShoe!
+                }
+
+                if let childEntity = parentEntity.findEntity(named: self.modelName),
                    selectedShoe.model3DName != childEntity.name {
-                    
-                    parentEntity.removeChild(childEntity)
-                    
+                    childEntity.removeFromParent()
+                         
                     Task {
                         do {
+                            self.modelName = selectedShoe.model3DName
+                            
                             let shoeEntity = try await Entity(named: selectedShoe.model3DName, in: shoesBundle)
                             
                             parentEntity.addChild(shoeEntity)
