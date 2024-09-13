@@ -42,9 +42,9 @@ SpatialShoes ha sido creada para mostrar una amplia gama de zapatillas en un ent
    - Los usuarios pueden ver una colección completa de zapatillas y acceder al detalle de cada una de ellas.
    - También pueden acceder al modo **Showroom** para ver los modelos en un modo inmersivo.
 
-   [![Galería de Zapatillas](https://img.youtube.com/vi/TkkQ7ZLSn28/0.jpg)](https://www.youtube.com/watch?v=TkkQ7ZLSn28)
+   [![Galería de Zapatillas](https://img.youtube.com/vi/qHanpnyhX5M/0.jpg)](https://www.youtube.com/watch?v=qHanpnyhX5M)
    
-   [![YouTube](https://img.shields.io/badge/YouTube-Ver_Video-FF0000?style=for-the-badge&logo=youtube&logoColor=white&labelColor=101010)](https://www.youtube.com/watch?v=TkkQ7ZLSn28)
+   [![YouTube](https://img.shields.io/badge/YouTube-Ver_Video-FF0000?style=for-the-badge&logo=youtube&logoColor=white&labelColor=101010)](https://www.youtube.com/watch?v=qHanpnyhX5M)
 
 4. **Vista Favoritos**:
    - Una sección donde los usuarios pueden acceder rápidamente a las zapatillas que han marcado como favoritas.
